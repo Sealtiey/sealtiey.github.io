@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@100..900&family=Jersey+10&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans:ital,wght@0,100;0,300;0,400;0,500;0,700;0,800;0,900;1,100;1,300;1,400;1,500;1,700;1,800;1,900&family=Great+Vibes&family=Inter:wght@100..900&family=Jersey+10&display=swap');
+
+.great-vibes-regular {
+	margin-top: 25px;
+	color: white;
+	font-family: "Great Vibes", cursive;
+	font-weight: 500;
+	font-size: 50px;
+	font-style: normal;
+}
+
+
+.alegreya-sans-regular {
+	color: white;
+	font-family: "Alegreya Sans", sans-serif;
+	font-weight: 350;
+	font-style: normal;
+	font-size: 21px;
+}
+
+.container {
+	padding-top: 30px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+}		
+
+.imagem-container {
+	width: 200px; 
+	height: 200px; 
+	border-radius: 50%; 
+	overflow: hidden; 
+	display: flex; 
+	justify-content: center; 
+	align-items: center; 
+	border: 5px solid white; 
+}
+
+.imagem-container img {
+	margin-top: 80px;
+	width: 100%; 
+	object-fit: cover;
+}
+
+.item-list {
+	margin-top: 40px;
+	list-style: none;
+}
+
+.item-list li {
+	color: white;
+	margin-bottom: 10px;
+}
+
+.item-list li a {
+	text-decoration: none;
+	color: white;
+	font-family: "Alegreya Sans", sans-serif;
+	/* border: white solid 2px; */
+	/*     padding: 5px 20px; */
+	/*     border-radius: 2px; */
+}
+
+.item-list li a i {
+	margin: 4px;
+}
+
+body, html {
+	height: 100%;
+	margin: 0;
+	background: #202020;
+}
+
+.bg {
+	margin: 0;
+	padding: 0;
+	height: 120vh; /* Para permitir o scroll e demonstrar o efeito */
+	background-image: url("texture_background.png");
+   	background-attachment: fixed;
+	background-size: cover; /* Ajusta a imagem para cobrir toda a área de fundo */
+	background-position: center; /* Centraliza a imagem */
+}
+
+ul {
+	list-style-type: none; /* Remove as bolinhas da lista */
+	padding: 0;
+}
+
+li {
+	margin: 5px 0; /* Espaçamento entre os itens da lista */
+}
+
+a {
+	display: block; /* Torna o link um bloco para definir largura e altura */
+	width: 200px; /* Largura dos itens */
+	height: 50px; /* Altura dos itens */
+	line-height: 50px; /* Centraliza o texto verticalmente */
+	text-align: center; /* Centraliza o texto horizontalmente */
+	border-radius: 25px; /* Bordas arredondadas */
+	background-color: #555; /* Cor de fundo dos itens */
+	color: white; /* Cor do texto */
+	text-decoration: none; /* Remove o sublinhado */
+	transition: background-color 0.3s; /* Transição suave para hover */
+}
+
+a:hover {
+	background-color: #777; /* Cor de fundo ao passar o mouse */
+}
