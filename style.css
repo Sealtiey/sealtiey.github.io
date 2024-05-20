@@ -70,17 +70,7 @@
 body, html {
 	height: 100%;
 	margin: 0;
-	background: #202020;
-}
-
-.bg {
-	margin: 0;
-	padding: 0;
-	height: 120vh; /* Para permitir o scroll e demonstrar o efeito */
-	background-image: url("texture_background.png");
-   	background-attachment: fixed;
-	background-size: cover; /* Ajusta a imagem para cobrir toda a área de fundo */
-	background-position: center; /* Centraliza a imagem */
+	background: #071946;
 }
 
 ul {
