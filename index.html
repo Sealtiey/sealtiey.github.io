@@ -10,26 +10,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#f7f8fa; --surface:#ffffff; --surface-2:#f0f2f5; --text:#16181d; --muted:#5b6270;
-  --border:#e2e5ea; --accent:#0f7b6c; --accent-soft:#e3f3f0; --pass:#1f8a4c; --fail:#c2372f; --warn:#b7791f;
-  --shadow:0 1px 2px rgba(16,24,40,.05),0 4px 16px rgba(16,24,40,.06);
-  --c-pass:#00897a; --c-fail:#c8372d;
-}
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){
-    --bg:#0f1115; --surface:#171a20; --surface-2:#1e222a; --text:#e8eaee; --muted:#9aa2b1;
-    --border:#2a2f39; --accent:#3cc4ae; --accent-soft:#143a35; --pass:#4ccf86; --fail:#ff7a70; --warn:#f0b54d;
-    --shadow:none; --c-pass:#26ab95; --c-fail:#e8574d;
-  }
-}
-:root[data-theme="dark"]{
-  --bg:#0f1115; --surface:#171a20; --surface-2:#1e222a; --text:#e8eaee; --muted:#9aa2b1;
-  --border:#2a2f39; --accent:#3cc4ae; --accent-soft:#143a35; --pass:#4ccf86; --fail:#ff7a70; --warn:#f0b54d;
+  color-scheme:dark;
+  --bg:#0b1220; --surface:#111b2b; --surface-2:#16233a; --text:#eef2f6; --muted:#a3b2c4;
+  --border:#22324b; --accent:#3cc4ae; --accent-soft:#113a3b; --pass:#4ccf86; --fail:#ff7a70; --warn:#f0b54d;
   --shadow:none; --c-pass:#26ab95; --c-fail:#e8574d;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 Inter,system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+body{margin:0;background:radial-gradient(ellipse 900px 520px at 12% 0%,#12304a 0%,rgba(18,48,74,0) 70%) no-repeat,var(--bg);color:var(--text);font:16px/1.6 Inter,system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
 a{color:var(--accent)}
 .wrap{max-width:1040px;margin:0 auto;padding:0 16px}
 code,.mono{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:.88em}
@@ -54,9 +42,7 @@ h1{font-size:clamp(2.1rem,5vw,3.3rem);line-height:1.1;margin:18px 0 12px;letter-
 .hero p.lead{font-size:1.08rem;max-width:660px;margin:0 0 28px}
 .btns{display:flex;flex-wrap:wrap;gap:12px}
 .btn{display:inline-block;padding:11px 18px;border-radius:10px;font-weight:600;text-decoration:none;border:1px solid var(--border);color:var(--text);background:var(--surface)}
-.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
-:root[data-theme="dark"] .btn.primary{color:#0f1115}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn.primary{color:#0f1115}}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#0b1220}
 
 /* sections */
 section{padding:56px 0;border-top:1px solid var(--border)}
@@ -191,6 +177,12 @@ details.shot img{max-width:720px}
 .hero-grid{display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center}
 .avatar{width:220px;height:220px;border-radius:50%;object-fit:cover;border:4px solid var(--surface);box-shadow:0 0 0 2px var(--accent),var(--shadow)}
 @media (max-width:720px){.hero-grid{grid-template-columns:1fr;gap:20px}.avatar{order:-1;width:120px;height:120px}}
+
+main{position:relative}
+.hero-bg{position:absolute;top:0;left:0;right:0;height:520px;overflow:hidden;pointer-events:none;z-index:0}
+.hero-bg svg{position:absolute;inset:0;width:100%;height:100%}
+.hero-grid-lines{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:44px 44px;-webkit-mask-image:linear-gradient(180deg,#000 0%,transparent 100%);mask-image:linear-gradient(180deg,#000 0%,transparent 100%)}
+.hero{position:relative;z-index:1}
 </style>
 </head>
 <body>
@@ -211,6 +203,7 @@ details.shot img{max-width:720px}
 </nav>
 
 <main id="top">
+  <div class="hero-bg" aria-hidden="true"><div class="hero-grid-lines"></div><svg id="hero-net" preserveAspectRatio="xMinYMid slice"></svg></div>
   <div class="wrap hero">
     <div class="hero-grid">
       <div class="hero-text">
@@ -681,6 +674,28 @@ pm.<span class="kw">test</span>("Assert response body is Forbidden", () => {
     var c=function(v){return v?'<span class="ok">✓ Permitido</span>':'<span class="no">✕ Restrito</span>';};
     b.insertAdjacentHTML('beforeend','<tr><td>'+p[0]+'</td><td>'+c(p[1])+'</td><td>'+c(p[2])+'</td><td>'+c(p[3])+'</td></tr>');
   });
+})();
+</script>
+
+<script>
+(function(){
+  var svg=document.getElementById('hero-net'); if(!svg) return;
+  var NS='http://www.w3.org/2000/svg', W=1600, H=520, seed=11;
+  svg.setAttribute('viewBox','0 0 '+W+' '+H);
+  function rnd(){ seed=(seed*16807)%2147483647; return seed/2147483647; }
+  var pts=[], i, j;
+  for(i=0;i<70;i++){ var x=rnd()*W, y=rnd()*H; pts.push([x,y,rnd()]); }
+  function fade(p){ var cx=Math.abs(p[0]-W*0.42)/(W*0.42); return Math.min(1,0.25+cx*0.9)*(1-p[1]/H*0.8); }
+  for(i=0;i<pts.length;i++) for(j=i+1;j<pts.length;j++){
+    var a=pts[i], b=pts[j], d=Math.hypot(a[0]-b[0],a[1]-b[1]);
+    if(d<150){ var l=document.createElementNS(NS,'line');
+      l.setAttribute('x1',a[0]);l.setAttribute('y1',a[1]);l.setAttribute('x2',b[0]);l.setAttribute('y2',b[1]);
+      l.setAttribute('stroke','rgba(60,196,174,'+((0.05+0.16*(1-d/150))*Math.min(fade(a),fade(b))).toFixed(3)+')');
+      svg.appendChild(l); } }
+  pts.forEach(function(p){ var f=fade(p), r=1.4+p[2]*2.4, c;
+    if(p[2]>0.85){ c=document.createElementNS(NS,'circle'); c.setAttribute('cx',p[0]);c.setAttribute('cy',p[1]);c.setAttribute('r',r*4);c.setAttribute('fill','rgba(60,196,174,'+(0.10*f).toFixed(3)+')'); svg.appendChild(c); }
+    c=document.createElementNS(NS,'circle'); c.setAttribute('cx',p[0]);c.setAttribute('cy',p[1]);c.setAttribute('r',r);
+    c.setAttribute('fill', p[2]>0.85?'rgba(140,240,222,'+(0.8*f).toFixed(3)+')':'rgba(60,196,174,'+(0.45*f).toFixed(3)+')'); svg.appendChild(c); });
 })();
 </script>
 </body>
