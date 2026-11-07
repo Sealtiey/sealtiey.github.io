@@ -1,31 +1,678 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Sealtiey</title>
-		<link rel="stylesheet" href="reset.css">
-		<link rel="stylesheet" href="style.css">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-	</head>
-	<body>	
-		<div class="bg">
-			<div class="container">
-				<div class="imagem-container">
-					<img class="profile-img" src="photo_profile.jpeg" alt="Imagem de Perfil">
-				</div> 
-				<h1 class="great-vibes-regular">Sealtiey Menegassi</h1>
-				<h2 style="margin-top: 13px;" class="alegreya-sans-regular">Consultora de</h2>
-				<h2 class="alegreya-sans-regular">Recrutamento e Seleção</h2>
-				<ul class="item-list">
-					<li><a href="https://wa.me/5582994065259" target="_blank"><i class="fa-brands fa-whatsapp"></i>Contato</a></li>
-					<li><a href="https://www.instagram.com/saltymenegassi/" target="_blank"><i class="fa-brands fa-instagram"></i>Instagram</a></li>
-					<li><a href="https://www.linkedin.com/in/sealtieymenegassi/" target="_blank"><i class="fa-brands fa-linkedin"></i>Linkedin</a></li>
-					<li><a href="https://www.linkedin.com/company/suarecrutadora/" target="_blank"><i class="fa-solid fa-user-group"></i>Vagas</a></li>
-			        <li><a href="https://tiktok.com/@saltymenegassi" target="_blank"><i class="fa-brands fa-tiktok"></i>TikTok</a></li>
-			        <li><a href="https://www.youtube.com/channel/UCx4vXjTh0qsM_XS_cDWHNCg" target="_blank"><i class="fa-brands fa-youtube"></i>YouTube</a></li>
-			    </ul>
-			</div>
-		</div>
-	</body>
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sealtiey Menegassi · QA</title>
+<meta name="description" content="Portfólio de Sealtiey Menegassi, Analista de QA Júnior: testes web e mobile, API, SQL e automação com Playwright.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f7f8fa; --surface:#ffffff; --surface-2:#f0f2f5; --text:#16181d; --muted:#5b6270;
+  --border:#e2e5ea; --accent:#0f7b6c; --accent-soft:#e3f3f0; --pass:#1f8a4c; --fail:#c2372f; --warn:#b7791f;
+  --shadow:0 1px 2px rgba(16,24,40,.05),0 4px 16px rgba(16,24,40,.06);
+  --c-pass:#00897a; --c-fail:#c8372d;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0f1115; --surface:#171a20; --surface-2:#1e222a; --text:#e8eaee; --muted:#9aa2b1;
+    --border:#2a2f39; --accent:#3cc4ae; --accent-soft:#143a35; --pass:#4ccf86; --fail:#ff7a70; --warn:#f0b54d;
+    --shadow:none; --c-pass:#26ab95; --c-fail:#e8574d;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0f1115; --surface:#171a20; --surface-2:#1e222a; --text:#e8eaee; --muted:#9aa2b1;
+  --border:#2a2f39; --accent:#3cc4ae; --accent-soft:#143a35; --pass:#4ccf86; --fail:#ff7a70; --warn:#f0b54d;
+  --shadow:none; --c-pass:#26ab95; --c-fail:#e8574d;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 Inter,system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+.wrap{max-width:1040px;margin:0 auto;padding:0 16px}
+code,.mono{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:.88em}
+
+/* nav */
+nav{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:56px;gap:16px}
+nav .brand{font-weight:700;text-decoration:none;color:var(--text)}
+nav ul{display:flex;gap:20px;list-style:none;margin:0;padding:0;font-size:.92rem}
+nav ul a{color:var(--muted);text-decoration:none}
+nav ul a:hover{color:var(--text)}
+nav ul a{white-space:nowrap}
+@media (max-width:960px){nav ul{gap:12px;font-size:.86rem}}
+@media (max-width:720px){nav ul{display:none}}
+
+/* hero */
+.hero{padding:72px 0 56px}
+.tag{display:inline-flex;align-items:center;gap:8px;background:var(--accent-soft);color:var(--accent);font-weight:600;font-size:.82rem;padding:5px 12px;border-radius:999px}
+.tag::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--pass)}
+h1{font-size:clamp(2.1rem,5vw,3.3rem);line-height:1.1;margin:18px 0 12px;letter-spacing:-.02em}
+.hero .role{font-size:1.2rem;color:var(--muted);margin:0 0 20px}
+.hero p.lead{font-size:1.08rem;max-width:660px;margin:0 0 28px}
+.btns{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-block;padding:11px 18px;border-radius:10px;font-weight:600;text-decoration:none;border:1px solid var(--border);color:var(--text);background:var(--surface)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+:root[data-theme="dark"] .btn.primary{color:#0f1115}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn.primary{color:#0f1115}}
+
+/* sections */
+section{padding:56px 0;border-top:1px solid var(--border)}
+h2{font-size:1.65rem;margin:0 0 8px;letter-spacing:-.01em}
+.sub{color:var(--muted);margin:0 0 32px;max-width:680px}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.pair{grid-template-columns:1fr}
+@media (min-width:960px){.pair{grid-template-columns:1.15fr 1fr;align-items:start}}
+.grid>*{min-width:0}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px 20px;box-shadow:var(--shadow)}
+.stat strong{display:block;font-size:2rem;line-height:1.1;color:var(--accent);letter-spacing:-.02em}
+.stat span{color:var(--muted);font-size:.9rem}
+.checks{list-style:none;padding:0;margin:0;display:grid;gap:10px;font-size:.94rem;color:var(--muted)}
+.checks li{padding-left:26px;position:relative}
+.checks li::before{content:"✓";position:absolute;left:0;top:0;color:var(--pass);font-weight:700}
+.checks strong{color:var(--text)}
+.kind-label{display:inline-block;font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--accent);margin-bottom:8px}
+.flow{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;counter-reset:f}
+.flow li{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:2px;font-size:.88rem;color:var(--muted)}
+.flow li strong{color:var(--text);font-size:.98rem}
+.flow .n{width:24px;height:24px;border-radius:50%;background:var(--accent-soft);color:var(--accent);font-weight:700;font-size:.8rem;display:grid;place-items:center;margin-bottom:6px}
+.legend{display:flex;gap:16px;font-size:.84rem;color:var(--muted);margin:4px 0 14px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.sw{width:10px;height:10px;border-radius:3px;display:inline-block}
+.sw-pass,.seg.pass{background:var(--c-pass)} .sw-fail,.seg.fail{background:var(--c-fail)}
+.chart{display:grid;gap:7px}
+.row{display:grid;grid-template-columns:minmax(110px,36%) 1fr 84px;align-items:center;gap:10px;font-size:.84rem;position:relative}
+.row .lbl{color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row .track{display:flex;gap:2px;height:12px}
+.row .seg{height:100%}
+.row .seg:first-child{border-radius:4px 0 0 4px}
+.row .seg:last-child{border-radius:0 4px 4px 0}
+.row .seg:only-child{border-radius:4px}
+.row .val{color:var(--muted);font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+.row .val b{color:var(--text);font-weight:600}
+.row:hover .lbl{color:var(--accent)}
+.tip{position:fixed;pointer-events:none;background:var(--text);color:var(--bg);font-size:.8rem;padding:6px 10px;border-radius:8px;opacity:0;transition:opacity .1s;z-index:20;white-space:nowrap}
+.tbl-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.86rem}
+th{text-align:left;color:var(--muted);font-weight:600;font-size:.78rem;text-transform:uppercase;letter-spacing:.04em;padding:8px 10px;border-bottom:1px solid var(--border)}
+td{padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:top}
+tr:last-child td{border-bottom:0}
+.perm td:not(:first-child),.perm th:not(:first-child){text-align:center}
+.ok,.no{display:inline-flex;align-items:center;gap:4px;font-weight:600;font-size:.8rem}
+.ok{color:var(--pass)} .no{color:var(--muted)}
+.downloads{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:20px}
+.downloads span{color:var(--muted);font-size:.92rem;margin-right:4px}
+.downloads .btn{padding:8px 14px;font-size:.9rem}
+code{overflow-wrap:anywhere}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:22px;box-shadow:var(--shadow)}
+.card h3{margin:0 0 6px;font-size:1.1rem}
+.card p{margin:0 0 12px;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
+.chip{font-size:.78rem;background:var(--surface-2);border:1px solid var(--border);padding:3px 9px;border-radius:999px;color:var(--text)}
+.proj{display:flex;flex-direction:column}
+.proj ul{margin:0 0 14px;padding-left:18px;color:var(--muted);font-size:.94rem}
+.proj .kind{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--accent);margin-bottom:6px}
+
+/* differential */
+.diff{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.diff .card strong{display:block;font-size:1.02rem;margin-bottom:4px}
+
+/* skills */
+.skill-group h3{font-size:.85rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:0 0 12px}
+
+/* bug ticket */
+.ticket{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:var(--shadow)}
+.ticket header{display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding:14px 20px;background:var(--surface-2);border-bottom:1px solid var(--border)}
+.ticket header .id{font-family:"JetBrains Mono",monospace;font-weight:500}
+.badge{font-size:.74rem;font-weight:600;padding:2px 9px;border-radius:6px;border:1px solid}
+.badge.sev{color:var(--warn);border-color:var(--warn)}
+.badge.pri{color:var(--accent);border-color:var(--accent)}
+.ticket .body{padding:20px;display:grid;gap:16px}
+.ticket .sum{font-weight:600;font-size:1.05rem;margin:0}
+.ticket dl{display:grid;grid-template-columns:150px 1fr;gap:10px 16px;margin:0;font-size:.94rem}
+.ticket dt{color:var(--muted)}
+.ticket dd{margin:0}
+.ticket ol{margin:0;padding-left:18px}
+.res-bad{color:var(--fail)} .res-ok{color:var(--pass)}
+@media (max-width:600px){.ticket dl{grid-template-columns:1fr}.ticket dt{margin-top:6px}}
+
+/* code */
+pre{margin:0;background:var(--surface-2);border:1px solid var(--border);border-radius:10px;padding:16px;overflow-x:auto;font-size:.84rem;line-height:1.55}
+.kw{color:var(--accent);font-weight:500}
+
+/* figures */
+figure{margin:0}
+figure img{width:100%;height:auto;display:block;border-radius:10px;border:1px solid var(--border)}
+figcaption{font-size:.86rem;color:var(--muted);margin-top:8px}
+
+/* certs */
+.certs{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px}
+.certs li{display:flex;justify-content:space-between;gap:12px;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 16px;font-size:.94rem}
+.certs li span:last-child{color:var(--muted);white-space:nowrap}
+
+/* contact */
+.contact{text-align:center}
+.contact .btns{justify-content:center}
+footer{padding:28px 0 40px;color:var(--muted);font-size:.85rem;text-align:center}
+
+.nav-cv{color:var(--accent)!important;font-weight:600}
+.certs li a{display:flex;justify-content:space-between;gap:12px;width:100%;color:var(--text);text-decoration:none}
+.certs li:has(a):hover{border-color:var(--accent)}
+.certs li a:hover .cert-org{color:var(--accent)}
+.cert-org{color:var(--muted);white-space:nowrap}
+.tc-list{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.tc{border:1px solid var(--border);border-radius:12px;padding:16px;background:var(--surface-2)}
+.tc-head{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:8px}
+.tc-head .id{font-family:"JetBrains Mono",monospace;font-weight:500;font-size:.9rem}
+.tc-title{font-weight:600;margin:0 0 10px!important;color:var(--text)!important}
+.tc dl{display:grid;grid-template-columns:1fr;gap:4px;margin:0;font-size:.88rem}
+.tc dt{color:var(--muted);font-size:.78rem;text-transform:uppercase;letter-spacing:.04em;margin-top:6px}
+.tc dd{margin:0}
+.tc ol{margin:0;padding-left:18px}
+.badge.neg{color:var(--fail);border-color:var(--fail)}
+.badge.pos{color:var(--pass);border-color:var(--pass)}
+.badge.crit{color:var(--fail);border-color:var(--fail)}
+
+details.shot{margin-top:4px}
+details.shot summary{cursor:pointer;display:inline-flex;align-items:center;gap:6px;font-weight:600;font-size:.9rem;color:var(--accent);list-style:none;padding:6px 0}
+details.shot summary::-webkit-details-marker{display:none}
+details.shot summary::before{content:"▸";transition:transform .15s}
+details.shot[open] summary::before{transform:rotate(90deg)}
+details.shot figure{margin:10px 0 0}
+details.shot img{max-width:720px}
+
+@media (min-width:960px){.samples{grid-template-columns:1fr 1fr;align-items:start}.samples>.card{grid-column:1/-1}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#top">Sealtiey Menegassi</a>
+    <ul>
+      <li><a href="#huntd">Huntd</a></li>
+      <li><a href="#amostras">Casos e bugs</a></li>
+      <li><a href="#api">API</a></li>
+      <li><a href="#projetos">Projetos</a></li>
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#certificados">Certificados</a></li>
+      <li><a class="nav-cv" href="assets/CV_Sealtiey_Menegassi_QA.pdf" download aria-label="Baixar currículo em PDF">Currículo (PDF)</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="top">
+  <div class="wrap hero">
+    <span class="tag">Disponível para vagas de QA Júnior · Remoto</span>
+    <h1>Sealtiey Menegassi</h1>
+    <p class="role">Analista de QA Júnior · Testes Manuais Web e Mobile, API e SQL</p>
+    <p class="lead">Passei mais de 9 anos em recrutamento, 6 deles contratando times de tecnologia, inclusive QAs. Conheço por dentro o que um time de produto espera de quem testa. Agora sou eu quem testa: escrevo planos e casos de teste, executo testes em web e mobile e encontro e documento bugs com clareza.</p>
+    <div class="btns">
+      <a class="btn primary" href="#huntd">Ver meu trabalho</a>
+      <a class="btn" href="assets/CV_Sealtiey_Menegassi_QA.pdf" download aria-label="Baixar currículo em PDF">Currículo (PDF)</a>
+      <a class="btn" href="https://www.linkedin.com/in/sealtieymenegassi/" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn" href="https://github.com/Sealtiey" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+
+  <section id="huntd">
+    <div class="wrap">
+      <span class="kind-label">Estudo de caso · Web + Mobile</span>
+      <h2>Huntd: um ciclo de testes completo, do plano ao relatório</h2>
+      <p class="sub">O Huntd é uma plataforma de contratação de desenvolvedores web3, com site e app. Conduzi sozinha todas as etapas do teste, de 22 a 25 de setembro de 2026. Como ex-recrutadora, eu conhecia bem o negócio por trás do produto.</p>
+
+      <ol class="flow">
+        <li><span class="n">1</span><strong>Plano de teste</strong><span>Escopo, estratégia, tipos de teste e ferramentas</span></li>
+        <li><span class="n">2</span><strong>RTM</strong><span>Cada requisito ligado aos IDs dos casos de teste</span></li>
+        <li><span class="n">3</span><strong>Permissões</strong><span>O que cada perfil pode acessar</span></li>
+        <li><span class="n">4</span><strong>TestRail</strong><span>155 casos escritos e executados, web e mobile</span></li>
+        <li><span class="n">5</span><strong>Jira</strong><span>8 bugs registrados e ligados aos resultados</span></li>
+        <li><span class="n">6</span><strong>Relatório</strong><span>Test Summary com métricas e conclusão</span></li>
+      </ol>
+
+      <div class="stats" style="margin-top:20px">
+        <div class="stat"><strong>155</strong><span>casos de teste (129 web + 26 mobile)</span></div>
+        <div class="stat"><strong>95%</strong><span>aprovação na web (123 de 129)</span></div>
+        <div class="stat"><strong>100%</strong><span>aprovação no app (26 de 26)</span></div>
+        <div class="stat"><strong>8</strong><span>bugs no Jira (3 de prioridade alta, 5 média)</span></div>
+      </div>
+
+      <div class="grid pair" style="margin-top:20px">
+        <div class="card">
+          <h3>Resultado por módulo</h3>
+          <div class="legend"><span><i class="sw sw-pass"></i>Passou</span><span><i class="sw sw-fail"></i>Falhou</span></div>
+          <div class="chart" id="chart-web" aria-label="Resultado dos testes web por módulo"></div>
+          <h3 style="margin-top:22px;font-size:.95rem">App mobile</h3>
+          <div class="chart" id="chart-mobile" aria-label="Resultado dos testes mobile por módulo"></div>
+        </div>
+
+        <div class="card">
+          <h3>Matriz de permissões</h3>
+          <p>O que cada perfil pode acessar. Cada linha virou casos de teste de acesso permitido e bloqueado.</p>
+          <div class="tbl-wrap">
+            <table class="perm">
+              <thead><tr><th>Módulo</th><th>Deslogado</th><th>Candidato</th><th>Recrutador</th></tr></thead>
+              <tbody id="perm-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:16px">
+        <h3>Matriz de rastreabilidade (RTM)</h3>
+        <p>Garante que nenhum requisito ficou sem teste. Um trecho da versão web:</p>
+        <div class="tbl-wrap">
+          <table class="rtm">
+            <thead><tr><th>Módulo</th><th>Requisitos cobertos</th><th>IDs dos casos</th><th>Total</th></tr></thead>
+            <tbody>
+              <tr><td>Main Page</td><td>Carregamento, depoimentos, navegação, botões, links de parceiros</td><td class="mono">T9–T16</td><td>8</td></tr>
+              <tr><td>Authentication / Registration</td><td>Métodos de cadastro, escolha de perfil, acesso autenticado</td><td class="mono">T31–T37</td><td>7</td></tr>
+              <tr><td>Jobs</td><td>Lista e cards de vagas, filtros, detalhes, candidatura</td><td class="mono">T93–T111</td><td>19</td></tr>
+              <tr><td>Chats / Messages</td><td>Conversas, pedidos de conexão, mensagens, templates</td><td class="mono">T112–T126</td><td>15</td></tr>
+              <tr><td>Bonus</td><td>Acesso, redirecionamento ao X, post pré-preenchido</td><td class="mono">T127–T130</td><td>4</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="margin:12px 0 0;font-size:.88rem">Total: 129 casos em 11 módulos na web e 26 casos em 5 módulos no app.</p>
+      </div>
+
+      <div class="downloads">
+        <span>Documentos do projeto:</span>
+        <a class="btn" href="assets/huntd/huntd-test-plan.docx" download>Plano de teste</a>
+        <a class="btn" href="assets/huntd/huntd-rtm.xlsx" download>RTM</a>
+        <a class="btn" href="assets/huntd/huntd-permission-testing.xlsx" download>Permissões</a>
+        <a class="btn" href="assets/huntd/huntd-test-report.xlsx" download>Test Report</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="amostras">
+    <div class="wrap">
+      <h2>Casos de teste e bugs</h2>
+      <p class="sub">Como escrevo casos de teste e documento os bugs que encontro em web, mobile e API, mais um exemplo de SQL.</p>
+
+      <div class="grid samples" style="gap:20px">
+
+        <div class="card">
+          <h3>Casos de teste: cadastro no JPetStore</h3>
+          <p>Como escrevo um caso de teste: título claro, passos reproduzíveis, resultado esperado verificável e prioridade. Originais escritos em inglês.</p>
+          <div class="tc-list">
+            <div class="tc">
+              <div class="tc-head"><span class="id">PS-TC-001</span><span class="badge neg">Negativo</span><span class="badge pri">Prioridade: alta</span></div>
+              <p class="tc-title">O campo User ID não deve aceitar um ID já cadastrado</p>
+              <dl>
+                <dt>Pré-condição</dt><dd>Ter um User ID já existente no sistema</dd>
+                <dt>Passos</dt><dd><ol><li>Abrir o formulário de cadastro</li><li>Digitar um User ID já existente</li><li>Preencher os demais campos com dados válidos</li><li>Clicar em "Save Account Information"</li></ol></dd>
+                <dt>Esperado</dt><dd class="res-ok">Mensagem de erro informando que o User ID deve ser único</dd>
+              </dl>
+            </div>
+            <div class="tc">
+              <div class="tc-head"><span class="id">PS-TC-002</span><span class="badge neg">Negativo</span><span class="badge pri">Prioridade: alta</span></div>
+              <p class="tc-title">O campo User ID não deve aceitar caracteres especiais</p>
+              <dl>
+                <dt>Passos</dt><dd><ol><li>Abrir o formulário de cadastro</li><li>Digitar um User ID com caractere especial</li><li>Preencher os demais campos com dados válidos</li><li>Clicar em "Save Account Information"</li></ol></dd>
+                <dt>Esperado</dt><dd class="res-ok">Mensagem de erro informando que o User ID aceita só letras e números</dd>
+              </dl>
+            </div>
+            <div class="tc">
+              <div class="tc-head"><span class="id">PS-TC-003</span><span class="badge pos">Positivo</span><span class="badge crit">Prioridade: crítica</span></div>
+              <p class="tc-title">O campo User ID deve aceitar letras e números</p>
+              <dl>
+                <dt>Passos</dt><dd><ol><li>Abrir o formulário de cadastro</li><li>Digitar um User ID com letras e números</li><li>Clicar em "Save Account Information"</li></ol></dd>
+                <dt>Esperado</dt><dd class="res-ok">Cadastro concluído e redirecionamento para a página inicial</dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+        <div class="ticket">
+          <header>
+            <span class="id">PS-002</span>
+            <span class="badge sev">Severidade: moderada</span>
+            <span class="badge pri">Prioridade: média</span>
+            <span class="chip">JPetStore · Cadastro</span>
+          </header>
+          <div class="body">
+            <p class="sum">E-mail em formato inválido (ex.: <code>@@@</code>) não mostra mensagem de erro; a página apenas recarrega.</p>
+            <dl>
+              <dt>Passos</dt>
+              <dd><ol><li>Abrir o site</li><li>Clicar em Sign In</li><li>Clicar em Register Now</li><li>Preencher o campo de e-mail com <code>@@@</code> e enviar</li></ol></dd>
+              <dt>Resultado atual</dt><dd class="res-bad">A página recarrega, sem nenhuma mensagem de validação.</dd>
+              <dt>Resultado esperado</dt><dd class="res-ok">Uma mensagem de erro informando que o e-mail é inválido.</dd>
+              <dt>Ambiente</dt><dd>macOS 14 Sonoma · Chrome (última versão)</dd>
+            </dl>
+          </div>
+        </div>
+
+                <div class="ticket">
+            <header>
+              <span class="id">KAN-23</span>
+              <span class="badge pri">Prioridade: média</span>
+              <span class="chip">Mobile · Android</span>
+            </header>
+            <div class="body">
+              <p class="sum">O botão Salvar não aplica o tema escuro selecionado.</p>
+              <dl>
+                <dt>Ambiente</dt>
+                <dd>App ToDo 1.0.0 · Emulador Pixel 7 · Android 17 · Android Studio Quail 3 · macOS 26.6</dd>
+                <dt>Passos</dt>
+                <dd><ol><li>Abrir o app ToDo</li><li>Ir em Settings</li><li>Selecionar Dark Theme</li><li>Tocar em Save</li></ol></dd>
+                <dt>Resultado atual</dt><dd class="res-bad">Nada acontece ao tocar em Save, e o app continua no tema anterior.</dd>
+                <dt>Resultado esperado</dt><dd class="res-ok">O tema escuro é salvo e aplicado.</dd>
+                <dt>Evidência</dt><dd>Gravação de tela no Loom, anexada ao ticket.</dd>
+              </dl>
+              <details class="shot">
+                <summary>Ver print no Jira</summary>
+                <figure><img src="assets/jira-mobile-bug.jpg" alt="Issue KAN-23 no Jira: ambiente, passos, resultado atual e esperado e link para o vídeo no Loom" loading="lazy"><figcaption>O bug no Jira, com o ambiente completo e o vídeo da reprodução.</figcaption></figure>
+              </details>
+            </div>
+        </div>
+
+                <div class="ticket">
+            <header>
+              <span class="id">KAN-30</span>
+              <span class="badge pri">Prioridade: média</span>
+              <span class="chip">Web · Back-end</span>
+            </header>
+            <div class="body">
+              <p class="sum">Criar um artigo sem tags retorna erro HTTP 500.</p>
+              <p style="margin:0;color:var(--muted);font-size:.94rem">Com o Conduit rodando localmente, fui além da tela de erro: localizei no log do servidor a causa no banco de dados e anexei ao ticket para agilizar a correção.</p>
+              <dl>
+                <dt>Passos</dt>
+                <dd><ol><li>Fazer login</li><li>Abrir a página de novo artigo</li><li>Preencher título, descrição e conteúdo</li><li>Deixar o campo Tags vazio</li><li>Publicar</li></ol></dd>
+                <dt>Resultado atual</dt><dd class="res-bad">Erro 500 Internal Server Error.</dd>
+                <dt>Resultado esperado</dt><dd class="res-ok">O artigo é criado sem tags ou aparece uma mensagem de validação clara.</dd>
+                <dt>Log</dt><dd><code>violates foreign key constraint "article_tags_tags_id_fk" (SQLSTATE 23503)</code></dd>
+              </dl>
+              <details class="shot">
+                <summary>Ver print no Jira</summary>
+                <figure><img src="assets/jira-web-500-bug.jpg" alt="Issue KAN-30 no Jira: descrição, passos, resultados e log de erro do banco de dados" loading="lazy"><figcaption>O bug no Jira, com o log de erro do banco de dados.</figcaption></figure>
+              </details>
+            </div>
+        </div>
+
+                <div class="ticket">
+            <header>
+              <span class="id">KAN-2</span>
+              <span class="badge pri">Prioridade: média</span>
+              <span class="chip">API · Postman → Jira</span>
+            </header>
+            <div class="body">
+              <p class="sum">O endpoint de perfil retorna <code>"bio": null</code> para o usuário <code>mark_savinov</code>.</p>
+              <p style="margin:0;color:var(--muted);font-size:.94rem">Encontrado ao rodar uma coleção no Postman com massa de dados de um arquivo CSV. A resposta não batia com o dado de entrada, então registrei no Jira.</p>
+              <dl>
+                <dt>Passos</dt>
+                <dd><ol><li>Enviar <code>GET /profiles/mark_savinov</code></li><li>Verificar o corpo da resposta</li></ol></dd>
+                <dt>Resultado atual</dt><dd class="res-bad">A API retorna <code>"bio": null</code>.</dd>
+                <dt>Resultado esperado</dt><dd class="res-ok">A API deveria retornar <code>"bio": "I'm a teacher"</code>, conforme o CSV.</dd>
+                <dt>Evidência</dt><dd>Corpo da resposta e captura de tela do Postman anexados.</dd>
+              </dl>
+              <details class="shot">
+                <summary>Ver print no Jira</summary>
+                <figure><img src="assets/jira-api-bug.jpg" alt="Issue KAN-2 no Jira com passos, resultado atual, resultado esperado, resposta da API e anexo" loading="lazy"><figcaption>O bug registrado no Jira, com a resposta da API e o print do Postman anexado.</figcaption></figure>
+              </details>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Consulta SQL com JOIN</h3>
+            <p>Artigos de um autor em um intervalo de datas, no banco do Conduit.</p>
+<pre><span class="kw">SELECT</span> a.*
+<span class="kw">FROM</span> article <span class="kw">AS</span> a
+<span class="kw">JOIN</span> users <span class="kw">AS</span> u <span class="kw">ON</span> a.author_id = u.id
+<span class="kw">WHERE</span> u.username = '1test'
+  <span class="kw">AND</span> a.createdAt >= '2020-07-05'
+  <span class="kw">AND</span> a.createdAt <  '2020-07-08'
+<span class="kw">ORDER BY</span> a.createdAt <span class="kw">DESC</span>;</pre>
+          <details class="shot">
+            <summary>Ver resultado no DBeaver</summary>
+            <figure><img src="assets/sql-join-dbeaver.jpg" alt="Consulta SQL executada no DBeaver, retornando 12 artigos" loading="lazy"><figcaption>A mesma consulta executada no DBeaver.</figcaption></figure>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="api">
+    <div class="wrap">
+      <h2>Destaque: testes de API do Conduit no Postman</h2>
+      <p class="sub">Uma coleção completa que cobre a API inteira do Conduit, com cenários positivos e negativos e verificações automáticas em cada requisição.</p>
+
+      <div class="stats">
+        <div class="stat"><strong>44</strong><span>requisições</span></div>
+        <div class="stat"><strong>157</strong><span>verificações automáticas</span></div>
+        <div class="stat"><strong>5</strong><span>módulos da API</span></div>
+        <div class="stat"><strong>4</strong><span>métodos: GET, POST, PUT, DELETE</span></div>
+      </div>
+
+      <div class="grid pair" style="margin-top:20px">
+        <div class="card">
+          <h3>O que a coleção cobre</h3>
+          <ul class="checks">
+            <li><strong>Cadastro e login:</strong> 16 cenários, incluindo e-mail sem @, campos vazios, usuário e e-mail já usados</li>
+            <li><strong>Valor-limite:</strong> usuário com 41 caracteres e e-mail com mais de 254</li>
+            <li><strong>Permissões:</strong> criar, editar e apagar sem login (401) e apagar artigo ou comentário de outra pessoa (403)</li>
+            <li><strong>Artigos, perfis, tags e comentários:</strong> criação, edição, feed, filtro por tag, seguir e deixar de seguir</li>
+            <li><strong>Dados dinâmicos:</strong> variáveis encadeiam uma requisição na outra, e scripts criam um segundo usuário para testar acesso indevido</li>
+            <li><strong>Desempenho:</strong> cada resposta é checada para chegar em menos de 1 segundo</li>
+          </ul>
+          <div class="btns" style="margin-top:16px">
+            <a class="btn" href="assets/conduit-api-tests.postman_collection.json" download>Baixar a coleção (.json)</a>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Exemplo: apagar o artigo de outra pessoa</h3>
+          <p>O sistema deve bloquear. O teste confere o código 403, o tempo de resposta e a mensagem.</p>
+<pre>pm.<span class="kw">test</span>("Assert response status code is 403", () => {
+  pm.response.to.have.status(<span class="kw">403</span>);
+});
+
+pm.<span class="kw">test</span>("Assert response time is less than 1000ms", () => {
+  pm.expect(pm.response.responseTime).to.be.below(<span class="kw">1000</span>);
+});
+
+pm.<span class="kw">test</span>("Assert response body is Forbidden", () => {
+  pm.expect(pm.response.text().trim()).to.eql(<span class="kw">"Forbidden"</span>);
+});</pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projetos">
+    <div class="wrap">
+      <h2>Projetos</h2>
+      <p class="sub">Aplicações reais e de treino que testei de ponta a ponta, do plano ao relatório.</p>
+      <div class="grid g2">
+
+        <article class="card proj">
+          <div class="kind">Web · Ciclo completo</div>
+          <h3>Conduit</h3>
+          <p>Rede de artigos estilo Medium, com cadastro, login, publicação, comentários e seguidores.</p>
+          <ul>
+            <li>Plano de teste com escopo, riscos, critérios de suspensão e de saída</li>
+            <li>Decomposição da Home e casos de teste de Sign In, Sign Up, Artigos e Settings</li>
+            <li>Execução de test runs e regressão no TestRail, integrado ao Jira</li>
+            <li>Testes de API no Postman e consultas SQL no banco da aplicação</li>
+          </ul>
+          <div class="chips"><span class="chip">TestRail</span><span class="chip">Jira</span><span class="chip">Postman</span><span class="chip">SQL</span></div>
+        </article>
+
+        <article class="card proj">
+          <div class="kind">Web · E-commerce</div>
+          <h3>JPetStore</h3>
+          <p>Loja virtual de pets: navegação, cadastro, autenticação, carrinho e finalização de pedido.</p>
+          <ul>
+            <li>Requisitos estendidos e casos de teste a partir deles</li>
+            <li>Execução dos casos e mapeamento do STLC</li>
+            <li>Bug reports das páginas de Cadastro, Sign In e Ajuda, com bug summary</li>
+          </ul>
+          <div class="chips"><span class="chip">Casos de teste</span><span class="chip">Bug reports</span><span class="chip">STLC</span></div>
+        </article>
+
+        <article class="card proj">
+          <div class="kind">Mobile</div>
+          <h3>Testes em apps mobile</h3>
+          <p>Apps nativos e web apps testados em emuladores, com foco em navegação, usabilidade e comportamento da interface.</p>
+          <ul>
+            <li>Ambiente com Android Studio e Genymotion</li>
+            <li>Bugs registrados no Jira com gravação de tela, dispositivo, SO e versão do app</li>
+            <li>Testes de design a partir de mockups</li>
+          </ul>
+          <div class="chips"><span class="chip">Android Studio</span><span class="chip">Genymotion</span><span class="chip">Jira</span></div>
+        </article>
+
+        <article class="card proj">
+          <div class="kind">API · Web</div>
+          <h3>API, DevTools e infraestrutura</h3>
+          <p>Como a web funciona por baixo, e como testar o que o usuário não vê.</p>
+          <ul>
+            <li>Coleções no Postman com variáveis e massa de dados via CSV</li>
+            <li>Análise de requisições com DevTools (Network, Console, Application)</li>
+            <li>Ambientes locais com Docker e consultas SQL com JOIN</li>
+          </ul>
+          <div class="chips"><span class="chip">Postman</span><span class="chip">DevTools</span><span class="chip">Docker</span><span class="chip">SQL</span></div>
+        </article>
+
+        <article class="card proj">
+          <div class="kind">Introdução à automação</div>
+          <h3>Primeiros passos com Playwright</h3>
+          <p>Módulo introdutório do curso, para entender como testes automatizados são escritos e organizados e conversar bem com quem automatiza.</p>
+          <ul>
+            <li>Exercícios guiados em Coffee Cart, Conduit e Wizard Bank</li>
+            <li>Conceitos de locators, assertions e Page Object Model</li>
+          </ul>
+          <div class="chips"><span class="chip">Playwright</span><span class="chip">Noções</span></div>
+        </article>
+      </div>
+      <p class="sub" style="margin:24px 0 0">Também pratiquei caça a bugs em mais de 15 sites reais e de treino, como DemoBlaze, Juice Shop, Domino's, Booked.net e Stellarium.</p>
+    </div>
+  </section>
+
+  <section id="sobre">
+    <div class="wrap">
+      <h2>De recrutadora a QA</h2>
+      <p class="sub">Passei mais de 9 anos em recrutamento, 6 deles contratando para tecnologia. No dia a dia eu alinhava requisitos com gestores técnicos antes de buscar candidatos. Hoje faço o mesmo antes de escrever casos de teste. Estas habilidades vieram comigo:</p>
+      <div class="diff">
+        <div class="card"><strong>Investigação</strong><p>Fazer as perguntas certas, desconfiar do óbvio e ir atrás do detalhe que ninguém viu, agora aplicado a requisitos e fluxos.</p></div>
+        <div class="card"><strong>Comunicação clara</strong><p>Anos dando feedback para candidatos e clientes. Meus bug reports são objetivos, reproduzíveis e sem ruído.</p></div>
+        <div class="card"><strong>Visão de negócio</strong><p>Recrutei para Desenvolvimento, Infra, Banco de Dados e QA. Entendo como times de produto funcionam e o que importa para eles.</p></div>
+        <div class="card"><strong>Organização</strong><p>Pós-graduação em Gestão de Projetos e prática com processos: planos de teste, prazos, critérios de saída e rastreabilidade.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="habilidades">
+    <div class="wrap">
+      <h2>Habilidades e ferramentas</h2>
+      <p class="sub">Formação prática em QA pela Mate Academy, com entregas revisadas em cada módulo.</p>
+      <div class="grid g3">
+        <div class="card skill-group">
+          <h3>Testes e documentação</h3>
+          <div class="chips">
+            <span class="chip">Testes manuais web</span><span class="chip">Testes mobile</span><span class="chip">Funcionais</span><span class="chip">Regressão</span><span class="chip">Smoke</span><span class="chip">Exploratórios</span><span class="chip">Permissões</span><span class="chip">Plano de teste</span><span class="chip">Casos de teste</span><span class="chip">Bug reports</span><span class="chip">RTM</span><span class="chip">Valor-limite</span><span class="chip">Classes de equivalência</span><span class="chip">Tabela de decisão</span><span class="chip">Pairwise</span>
+          </div>
+        </div>
+        <div class="card skill-group">
+          <h3>Ferramentas</h3>
+          <div class="chips">
+            <span class="chip">Jira</span><span class="chip">TestRail</span><span class="chip">Postman</span><span class="chip">Chrome DevTools</span><span class="chip">Android Studio</span><span class="chip">Genymotion</span><span class="chip">DBeaver</span><span class="chip">Docker</span><span class="chip">Git / GitHub</span>
+          </div>
+        </div>
+        <div class="card skill-group">
+          <h3>Técnico</h3>
+          <div class="chips">
+            <span class="chip">SQL (JOIN, GROUP BY)</span><span class="chip">APIs REST</span><span class="chip">HTML e CSS</span><span class="chip">JavaScript básico</span><span class="chip">Noções de automação (Playwright)</span>
+          </div>
+        </div>
+      </div>
+      <p class="sub" style="margin:16px 0 0;font-size:.92rem">Também: uso de IA no trabalho com validação das respostas, ética em QA e gestão de estresse.</p>
+    </div>
+  </section>
+
+  <section id="certificados">
+    <div class="wrap">
+      <h2>Formação e certificados</h2>
+      <p class="sub">Trilha de QA da Mate Academy. Clique em um certificado para abrir o PDF.</p>
+      <ul class="certs">
+        <li><a href="assets/certificados/qa-theory.pdf" target="_blank" rel="noopener"><span>QA Theory</span><span class="cert-org">Mate Academy · PDF ↗</span></a></li>
+        <li><a href="assets/certificados/testing-web-applications.pdf" target="_blank" rel="noopener"><span>Testing Web Applications</span><span class="cert-org">Mate Academy · PDF ↗</span></a></li>
+        <li><a href="assets/certificados/mobile-testing.pdf" target="_blank" rel="noopener"><span>Mobile Testing</span><span class="cert-org">Mate Academy · PDF ↗</span></a></li>
+        <li><a href="assets/certificados/qa-ethics.pdf" target="_blank" rel="noopener"><span>QA Ethics</span><span class="cert-org">Mate Academy · PDF ↗</span></a></li>
+        <li><a href="assets/certificados/sql-basics.pdf" target="_blank" rel="noopener"><span>SQL Basics</span><span class="cert-org">Mate Academy · PDF ↗</span></a></li>
+        <li><a href="assets/certificados/how-the-web-works.pdf" target="_blank" rel="noopener"><span>How The Web Works</span><span class="cert-org">Mate Academy · PDF ↗</span></a></li>
+        <li><a href="assets/certificados/working-with-infrastructure.pdf" target="_blank" rel="noopener"><span>Working With Infrastructure</span><span class="cert-org">Mate Academy · PDF ↗</span></a></li>
+        <li><a href="assets/certificados/git-and-terminal.pdf" target="_blank" rel="noopener"><span>Git and Terminal</span><span class="cert-org">Mate Academy · PDF ↗</span></a></li>
+        <li><a href="assets/certificados/git-and-terminal-practice.pdf" target="_blank" rel="noopener"><span>Git and Terminal: Practice</span><span class="cert-org">Mate Academy · PDF ↗</span></a></li>
+        <li><a href="assets/certificados/new-javascript-basics.pdf" target="_blank" rel="noopener"><span>New JavaScript Basics</span><span class="cert-org">Mate Academy · PDF ↗</span></a></li>
+        <li><a href="assets/certificados/javascript-basics-extended.pdf" target="_blank" rel="noopener"><span>JavaScript Basics Extended</span><span class="cert-org">Mate Academy · PDF ↗</span></a></li>
+        <li><a href="assets/certificados/genai-essentials.pdf" target="_blank" rel="noopener"><span>GenAI Essentials</span><span class="cert-org">Mate Academy · PDF ↗</span></a></li>
+        <li><a href="assets/certificados/communication-stress-management.pdf" target="_blank" rel="noopener"><span>Communication and Stress Management</span><span class="cert-org">Mate Academy · PDF ↗</span></a></li>
+        <li><a href="assets/certificados/course-fundamentals.pdf" target="_blank" rel="noopener"><span>Course Fundamentals</span><span class="cert-org">Mate Academy · PDF ↗</span></a></li>
+        <li><span><span>HTML + CSS Basics</span></span><span class="cert-org">Mate Academy</span></li>
+        <li><span><span>API Beginner</span></span><span class="cert-org">Postman</span></li>
+      </ul>
+      <h3 style="margin:28px 0 12px;font-size:1rem">Formação acadêmica</h3>
+      <ul class="certs">
+        <li><span>Pós-graduação em Gestão de Projetos</span><span class="cert-org">Descomplica</span></li>
+        <li><span>MBA em Gestão de Pessoas, Liderança e Coaching</span><span class="cert-org">Descomplica</span></li>
+        <li><span>MBA em Recursos Humanos</span><span class="cert-org">Descomplica</span></li>
+        <li><span>Tecnólogo em Processos Gerenciais</span><span class="cert-org">Unipar</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="contato" class="contact">
+    <div class="wrap">
+      <h2>Vamos conversar?</h2>
+      <p class="sub" style="margin:0 auto 24px">Procuro minha primeira oportunidade como QA Júnior.</p>
+      <div class="btns">
+        <a class="btn primary" href="mailto:sealtieyam@gmail.com">sealtieyam@gmail.com</a>
+        <a class="btn" href="https://www.linkedin.com/in/sealtieymenegassi/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="https://github.com/Sealtiey" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn" href="assets/CV_Sealtiey_Menegassi_QA.pdf" download aria-label="Baixar currículo em PDF">Currículo (PDF)</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>© 2026 Sealtiey Menegassi</footer>
+<div class="tip" id="tip" role="tooltip"></div>
+<script>
+(function(){
+  var web=[["Main Page",8,1],["For Companies",6,0],["For Engineers",8,1],["Authentication / Registration",7,0],["Candidates",17,0],["Candidate Profile",31,3],["Recruiter Profile",6,0],["Jobs",19,0],["Chats / Messages",15,1],["Bonus",4,0],["Footer",8,0]];
+  var mob=[["Login / Authentication",8,0],["My Chats",7,0],["Profile",6,0],["Preferences",4,0],["Sign Out",1,0]];
+  var max=31, tip=document.getElementById('tip');
+  function draw(id,data){
+    var el=document.getElementById(id);
+    data.forEach(function(d){
+      var total=d[1], fail=d[2], pass=total-fail;
+      var row=document.createElement('div'); row.className='row';
+      var w=(total/max*100);
+      row.innerHTML='<span class="lbl">'+d[0]+'</span>'+
+        '<span class="track" style="width:'+w+'%">'+
+        '<span class="seg pass" style="flex:'+pass+'"></span>'+
+        (fail?'<span class="seg fail" style="flex:'+fail+'"></span>':'')+'</span>'+
+        '<span class="val"><b>'+pass+'</b>/'+total+(fail?' · '+fail+' ✕':'')+'</span>';
+      var msg=d[0]+': '+total+' casos · '+pass+' passaram · '+fail+' falharam';
+      row.setAttribute('aria-label',msg);
+      row.addEventListener('mousemove',function(e){tip.textContent=msg;tip.style.left=Math.min(e.clientX+12,innerWidth-tip.offsetWidth-8)+'px';tip.style.top=(e.clientY+14)+'px';tip.style.opacity=1;});
+      row.addEventListener('mouseleave',function(){tip.style.opacity=0;});
+      el.appendChild(row);
+    });
+  }
+  draw('chart-web',web); draw('chart-mobile',mob);
+  var perm=[["Main Page",1,1,1],["For Companies",1,1,1],["For Engineers",1,1,1],["Autenticação / Cadastro",1,1,1],["Candidates",0,1,1],["Candidate Profile",0,1,1],["Recruiter Profile",0,0,1],["Jobs",0,1,1],["Chats / Messages",0,1,1],["Bonus",0,0,1],["Footer",1,1,1]];
+  var b=document.getElementById('perm-body');
+  perm.forEach(function(p){
+    var c=function(v){return v?'<span class="ok">✓ Permitido</span>':'<span class="no">✕ Restrito</span>';};
+    b.insertAdjacentHTML('beforeend','<tr><td>'+p[0]+'</td><td>'+c(p[1])+'</td><td>'+c(p[2])+'</td><td>'+c(p[3])+'</td></tr>');
+  });
+})();
+</script>
+</body>
 </html>

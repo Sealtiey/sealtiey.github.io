@@ -1,0 +1,2121 @@
+{
+  "info": {
+    "_postman_id": "5e921972-c028-4b3f-84bc-e3e0a93c8a3a",
+    "name": "Postman Practice [Sealtiey Menegassi]",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "25648254",
+    "_collection_link": "https://go.postman.co/collection/25648254-5e921972-c028-4b3f-84bc-e3e0a93c8a3a?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "User",
+      "item": [
+        {
+          "name": "Successful sign up",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Assert response status code is 200\", function () {\n    pm.response.to.have.status(200);\n});\n\npm.test(\"Assert user is returned\", function () {\n    const response = pm.response.json();\n\n    pm.expect(response.user).to.exist;\n});\n\npm.test(\"Assert response time is less than 1000ms\", function () {\n    pm.expect(pm.response.responseTime).to.be.below(1000);\n});\n\nconst response = pm.response.json();\npm.collectionVariables.set(\"token\", response.user.token);"
+                ]
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const timestamp = Date.now();\n\nconst username = `testuser${timestamp}`;\nconst email = `testuser${timestamp}@test.com`;\n\npm.collectionVariables.set(\"timestamp\", timestamp);\npm.collectionVariables.set(\"username\", username);\npm.collectionVariables.set(\"email\", email);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user\": {\n    \"username\": \"{{username}}\",\n    \"email\": \"{{email}}\",\n    \"password\": \"{{passwordConduit}}\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/users",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Sign in with non-existing credential",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Assert response status code is 422\", function () {\n    pm.response.to.have.status(422);\n});\n\npm.test(\"Assert response time is less than 1000ms\", function () {\n    pm.expect(pm.response.responseTime).to.be.below(1000);\n});\n\npm.test(\"Assert validation error is returned\", function () {\n    const response = pm.response.json();\n\n    pm.expect(response.errors).to.exist;\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user\": {\n    \"email\": \"nonexisting@test.com\",\n    \"password\": \"{{passwordConduit}}\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/users/login",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "users",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Sign in with empty email",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Assert response status code is 422\", function () {\n    pm.response.to.have.status(422);\n});\n\npm.test(\"Assert response time is less than 1000ms\", function () {\n    pm.expect(pm.response.responseTime).to.be.below(1000);\n});\n\npm.test(\"Assert validation error is returned\", function () {\n    const response = pm.response.json();\n\n    pm.expect(response.errors).to.exist;\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user\": {\n    \"email\": \"\",\n    \"password\": \"{{passwordConduit}}\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/users/login",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "users",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Sign in with empty password",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Assert response status code is 422\", function () {\n    pm.response.to.have.status(422);\n});\n\npm.test(\"Assert response time is less than 1000ms\", function () {\n    pm.expect(pm.response.responseTime).to.be.below(1000);\n});\n\npm.test(\"Assert validation error is returned\", function () {\n    const response = pm.response.json();\n\n    pm.expect(response.errors).to.exist;\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user\": {\n    \"email\": \"{{email}}\",\n    \"password\": \"\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/users/login",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "users",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Sign up with taken username",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Assert response status code is 422\", function () {\n    pm.response.to.have.status(422);\n});\n\npm.test(\"Assert response time is less than 1000ms\", function () {\n    pm.expect(pm.response.responseTime).to.be.below(1000);\n});\n\npm.test(\"Assert validation error is returned\", function () {\n    const response = pm.response.json();\n\n    pm.expect(response.errors).to.exist;\n});"
+                ]
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const timestamp = Date.now();\n\nconst takenUsername = `takenuser${timestamp}`;\nconst takenEmail = `taken${timestamp}@test.com`;\n\npm.collectionVariables.set(\"takenUsername\", takenUsername);\npm.collectionVariables.set(\"takenEmail\", takenEmail);\n\npm.sendRequest({\n    url: `${pm.collectionVariables.get(\"url\")}/users`,\n    method: \"POST\",\n    header: {\n        \"Content-Type\": \"application/json\"\n    },\n    body: {\n        mode: \"raw\",\n        raw: JSON.stringify({\n            user: {\n                username: takenUsername,\n                email: takenEmail,\n                password: pm.collectionVariables.get(\"passwordConduit\")\n            }\n        })\n    }\n}, function (err, res) {\n    if (err) {\n        console.log(\"Error creating prerequisite user:\", err);\n    }\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user\": {\n    \"username\": \"{{takenUsername}}\",\n    \"email\": \"another{{timestamp}}@test.com\",\n    \"password\": \"{{passwordConduit}}\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/users/login",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "users",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Sign up with taken email",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Assert response status code is 422\", function () {\n    pm.response.to.have.status(422);\n});\n\npm.test(\"Assert response time is less than 1000ms\", function () {\n    pm.expect(pm.response.responseTime).to.be.below(1000);\n});\n\npm.test(\"Assert validation error is returned\", function () {\n    const response = pm.response.json();\n\n    pm.expect(response.errors).to.exist;\n});"
+                ]
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "console.log(\"BEFORE REQUEST - SIGN UP TAKEN EMAIL\");"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user\": {\n    \"username\": \"anotheruser{{timestamp}}\",\n    \"email\": \"{{takenEmail}}\",\n    \"password\": \"{{passwordConduit}}\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/users",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Sign up with username starting from number",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Assert response status code is 422\", function () {\n    pm.response.to.have.status(422);\n});\n\npm.test(\"Assert response time is less than 1000ms\", function () {\n    pm.expect(pm.response.responseTime).to.be.below(1000);\n});\n\npm.test(\"Assert validation error is returned\", function () {\n    const response = pm.response.json();\n    pm.expect(response.errors).to.exist;\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user\": {\n    \"username\": \"123user{{timestamp}}\",\n    \"email\": \"number{{timestamp}}@test.com\",\n    \"password\": \"{{passwordConduit}}\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/users",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Sign up with username with 41 symbols",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Assert response status code is 422\", function () {\n    pm.response.to.have.status(422);\n});\n\npm.test(\"Assert response time is less than 1000ms\", function () {\n    pm.expect(pm.response.responseTime).to.be.below(1000);\n});\n\npm.test(\"Assert validation error is returned\", function () {\n    const response = pm.response.json();\n    pm.expect(response.errors).to.exist;\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user\": {\n    \"username\": \"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n    \"email\": \"symbols{{timestamp}}@test.com\",\n    \"password\": \"{{passwordConduit}}\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/users",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Sign up with username with spaces",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Assert response status code is 422\", function () {\n    pm.response.to.have.status(422);\n});\n\npm.test(\"Assert response time is less than 1000ms\", function () {\n    pm.expect(pm.response.responseTime).to.be.below(1000);\n});\n\npm.test(\"Assert validation error is returned\", function () {\n    const response = pm.response.json();\n    pm.expect(response.errors).to.exist;\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user\": {\n    \"username\": \"test user{{timestamp}}\",\n    \"email\": \"spaces{{timestamp}}@test.com\",\n    \"password\": \"{{passwordConduit}}\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/users",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Sign up with empty username",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Assert response status code is 422\", function () {\n    pm.response.to.have.status(422);\n});\n\npm.test(\"Assert response time is less than 1000ms\", function () {\n    pm.expect(pm.response.responseTime).to.be.below(1000);\n});\n\npm.test(\"Assert validation error is returned\", function () {\n    const response = pm.response.json();\n    pm.expect(response.errors).to.exist;\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user\": {\n    \"username\": \"\",\n    \"email\": \"emptyusername{{timestamp}}@test.com\",\n    \"password\": \"{{passwordConduit}}\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/users",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Sign up with empty email",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Assert response status code is 422\", function () {\n    pm.response.to.have.status(422);\n});\n\npm.test(\"Assert response time is less than 1000ms\", function () {\n    pm.expect(pm.response.responseTime).to.be.below(1000);\n});\n\npm.test(\"Assert validation error is returned\", function () {\n    const response = pm.response.json();\n    pm.expect(response.errors).to.exist;\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user\": {\n    \"username\": \"emptyemail{{timestamp}}\",\n    \"email\": \"\",\n    \"password\": \"{{passwordConduit}}\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/users",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Sign up with email without @",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Assert response status code is 422\", function () {\n    pm.response.to.have.status(422);\n});\n\npm.test(\"Assert response time is less than 1000ms\", function () {\n    pm.expect(pm.response.responseTime).to.be.below(1000);\n});\n\npm.test(\"Assert validation error is returned\", function () {\n    const response = pm.response.json();\n    pm.expect(response.errors).to.exist;\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user\": {\n    \"username\": \"noat{{timestamp}}\",\n    \"email\": \"emailtest.com\",\n    \"password\": \"{{passwordConduit}}\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/users",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Sign up with email without",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Assert response status code is 422\", function () {\n    pm.response.to.have.status(422);\n});\n\npm.test(\"Assert response time is less than 1000ms\", function () {\n    pm.expect(pm.response.responseTime).to.be.below(1000);\n});\n\npm.test(\"Assert validation error is returned\", function () {\n    const response = pm.response.json();\n    pm.expect(response.errors).to.exist;\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user\": {\n    \"username\": \"nodot{{timestamp}}\",\n    \"email\": \"emailtest@com\",\n    \"password\": \"{{passwordConduit}}\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/users",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Sign up with email without name part",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Assert response status code is 422\", function () {\n    pm.response.to.have.status(422);\n});\n\npm.test(\"Assert response time is less than 1000ms\", function () {\n    pm.expect(pm.response.responseTime).to.be.below(1000);\n});\n\npm.test(\"Assert validation error is returned\", function () {\n    const response = pm.response.json();\n    pm.expect(response.errors).to.exist;\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user\": {\n    \"username\": \"noname{{timestamp}}\",\n    \"email\": \"@test.com\",\n    \"password\": \"{{passwordConduit}}\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/users",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Sign up with email with more than 254 symbols",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Assert response status code is 422\", function () {\n    pm.response.to.have.status(422);\n});\n\npm.test(\"Assert response time is less than 1000ms\", function () {\n    pm.expect(pm.response.responseTime).to.be.below(1000);\n});\n\npm.test(\"Assert validation error is returned\", function () {\n    const response = pm.response.json();\n    pm.expect(response.errors).to.exist;\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user\": {\n    \"username\": \"longemail{{timestamp}}\",\n    \"email\": \"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@test.com\",\n    \"password\": \"{{passwordConduit}}\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/users",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Sign up with empty password",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Assert response status code is 422\", function () {\n    pm.response.to.have.status(422);\n});\n\npm.test(\"Assert response time is less than 1000ms\", function () {\n    pm.expect(pm.response.responseTime).to.be.below(1000);\n});\n\npm.test(\"Assert validation error is returned\", function () {\n    const response = pm.response.json();\n    pm.expect(response.errors).to.exist;\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user\": {\n    \"username\": \"emptypass{{timestamp}}\",\n    \"email\": \"emptypass{{timestamp}}@test.com\",\n    \"password\": \"\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/users",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get info about user",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Assert response status code is 200\", function () {\n    pm.response.to.have.status(200);\n});\n\npm.test(\"Assert response time is less than 1000ms\", function () {\n    pm.expect(pm.response.responseTime).to.be.below(1000);\n});\n\npm.test(\"Assert user is returned\", function () {\n    const response = pm.response.json();\n\n    pm.expect(response.user).to.exist;\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": " Token {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/user",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "user"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update info about user: image",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Assert response status code is 200\", function () {\n    pm.response.to.have.status(200);\n});\n\npm.test(\"Assert response time is less than 1000ms\", function () {\n    pm.expect(pm.response.responseTime).to.be.below(1000);\n});\n\npm.test(\"Assert user is returned\", function () {\n    const response = pm.response.json();\n\n    pm.expect(response.user).to.exist;\n});\n\npm.test(\"Assert user image is updated\", function () {\n    const response = pm.response.json();\n\n    pm.expect(response.user.image).to.eql(\"https://i.pravatar.cc/300\");\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user\": {\n    \"image\": \"https://i.pravatar.cc/300\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/user",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "user"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update info about user: bio",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Assert response status code is 200\", function () {\n    pm.response.to.have.status(200);\n});\n\npm.test(\"Assert response time is less than 1000ms\", function () {\n    pm.expect(pm.response.responseTime).to.be.below(1000);\n});\n\npm.test(\"Assert user is returned\", function () {\n    const response = pm.response.json();\n\n    pm.expect(response.user).to.exist;\n});\n\npm.test(\"Assert user bio is updated\", function () {\n    const response = pm.response.json();\n\n    pm.expect(response.user.bio).to.eql(\"QA tester learning API testing with Postman.\");\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user\": {\n    \"bio\": \"QA tester learning API testing with Postman.\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/user",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "user"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update info about user: username",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Assert response status code is 200\", function () {\n    pm.response.to.have.status(200);\n});\n\npm.test(\"Assert response time is less than 1000ms\", function () {\n    pm.expect(pm.response.responseTime).to.be.below(1000);\n});\n\npm.test(\"Assert user is returned\", function () {\n    const response = pm.response.json();\n\n    pm.expect(response.user).to.exist;\n});\n\npm.test(\"Assert username is updated\", function () {\n    const response = pm.response.json();\n\n    pm.expect(response.user.username).to.eql(\n    `updateduser${pm.collectionVariables.get(\"timestamp\")}`\n);\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user\": {\n    \"username\": \"updateduser{{timestamp}}\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/user",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "user"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "o: Update info about user: email",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Assert response status code is 200\", function () {\n    pm.response.to.have.status(200);\n});\n\npm.test(\"Assert response time is less than 1000ms\", function () {\n    pm.expect(pm.response.responseTime).to.be.below(1000);\n});\n\npm.test(\"Assert user is returned\", function () {\n    const response = pm.response.json();\n\n    pm.expect(response.user).to.exist;\n});\n\npm.test(\"Assert email is updated\", function () {\n    const response = pm.response.json();\n\npm.expect(response.user.email).to.eql(\n    `updatedemail${pm.collectionVariables.get(\"timestamp\")}@test.com`\n);\n});\n\n"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user\": {\n    \"email\": \"updatedemail{{timestamp}}@test.com\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/user",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "user"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update info about user: password",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Assert response status code is 200\", function () {\n    pm.response.to.have.status(200);\n});\n\npm.test(\"Assert response time is less than 1000ms\", function () {\n    pm.expect(pm.response.responseTime).to.be.below(1000);\n});\n\npm.test(\"Assert user is returned\", function () {\n    const response = pm.response.json();\n\n    pm.expect(response.user).to.exist;\n});\n\npm.test(\"Assert password update returns user data\", function () {\n    const response = pm.response.json();\n\n    pm.expect(response.user.password).to.not.exist;\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user\": {\n    \"password\": \"NewTest@123456\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/user",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "user"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update info about user without authorization",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Assert response status code is 401\", function () {\n    pm.response.to.have.status(401);\n});\n\npm.test(\"Assert response time is less than 1000ms\", function () {\n    pm.expect(pm.response.responseTime).to.be.below(1000);\n});\n\npm.test(\"Assert response body is Unauthorized\", function () {\n    pm.expect(pm.response.text().trim()).to.eql(\"Unauthorized\");\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user\": {\n    \"bio\": \"Test without authorization\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/user",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "user"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Articles",
+      "item": [
+        {
+          "name": "Create an article",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Assert response status code is 200\", function () {\n    pm.response.to.have.status(200);\n});\n\npm.test(\"Assert response time is less than 1000ms\", function () {\n    pm.expect(pm.response.responseTime).to.be.below(1000);\n});\n\npm.test(\"Assert article is returned\", function () {\n    const response = pm.response.json();\n\n    pm.expect(response.article).to.exist;\n});\n\npm.test(\"Assert article title is correct\", function () {\n    const response = pm.response.json();\n\n    pm.expect(response.article.title).to.eql(\n        `Test Article ${pm.collectionVariables.get(\"timestamp\")}`\n    );\n});\n\npm.test(\"Assert article description is correct\", function () {\n    const response = pm.response.json();\n\n    pm.expect(response.article.description).to.eql(\n        \"Article created for API testing\"\n    );\n});\n\npm.test(\"Assert article body is correct\", function () {\n    const response = pm.response.json();\n\n    pm.expect(response.article.body).to.eql(\n        \"This is a test article created with Postman.\"\n    );\n\n});\n\nconst response = pm.response.json();\n\npm.collectionVariables.set(\"articleSlug\", response.article.slug);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"article\": {\n    \"title\": \"Test Article {{timestamp}}\",\n    \"description\": \"Article created for API testing\",\n    \"body\": \"This is a test article created with Postman.\",\n    \"tagList\": [\n      \"postman\",\n      \"testing\"\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/articles",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "articles"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update an article",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Assert response status code is 200\", function () {\n    pm.response.to.have.status(200);\n});\n\npm.test(\"Assert response time is less than 1000ms\", function () {\n    pm.expect(pm.response.responseTime).to.be.below(1000);\n});\n\npm.test(\"Assert article is returned\", function () {\n    const response = pm.response.json();\n\n    pm.expect(response.article).to.exist;\n});\n\npm.test(\"Assert article title is updated\", function () {\n    const response = pm.response.json();\n\n    pm.expect(response.article.title).to.eql(\n        `Updated Test Article ${pm.collectionVariables.get(\"timestamp\")}`\n    );\n});\n\npm.test(\"Assert article description is updated\", function () {\n    const response = pm.response.json();\n\n    pm.expect(response.article.description).to.eql(\n        \"Updated article for API testing\"\n    );\n});\n\npm.test(\"Assert article body is updated\", function () {\n    const response = pm.response.json();\n\n    pm.expect(response.article.body).to.eql(\n        \"This article was updated with Postman.\"\n    );\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"article\": {\n    \"title\": \"Updated Test Article {{timestamp}}\",\n    \"description\": \"Updated article for API testing\",\n    \"body\": \"This article was updated with Postman.\",\n    \"tagList\": [\n      \"postman\",\n      \"updated\"\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/articles/{{articleSlug}}",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "articles",
+                "{{articleSlug}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete an article",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Assert response status code is 204\", function () {\n    pm.response.to.have.status(204);\n});\n\npm.test(\"Assert response time is less than 1000ms\", function () {\n    pm.expect(pm.response.responseTime).to.be.below(1000);\n});\n\npm.test(\"Assert response body is empty\", function () {\n    pm.expect(pm.response.text()).to.eql(\"\");\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/articles/{{articleSlug}}",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "articles",
+                "{{articleSlug}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get an article",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Assert response status code is 200\", function () {\n    pm.response.to.have.status(200);\n});\n\npm.test(\"Assert response time is less than 1000ms\", function () {\n    pm.expect(pm.response.responseTime).to.be.below(1000);\n});\n\npm.test(\"Assert article is returned\", function () {\n    const response = pm.response.json();\n\n    pm.expect(response.article).to.exist;\n});\n\npm.test(\"Assert article has required properties\", function () {\n    const response = pm.response.json();\n\n    pm.expect(response.article).to.have.property(\"title\");\n    pm.expect(response.article).to.have.property(\"description\");\n    pm.expect(response.article).to.have.property(\"body\");\n    pm.expect(response.article).to.have.property(\"slug\");\n});"
+                ]
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const timestamp = Date.now();\n\npm.collectionVariables.set(\n    \"getArticleTitle\",\n    `Article for GET ${timestamp}`\n);\n\npm.sendRequest({\n    url: `${pm.collectionVariables.get(\"url\")}/articles`,\n    method: \"POST\",\n    header: {\n        \"Authorization\": `Token ${pm.collectionVariables.get(\"token\")}`,\n        \"Content-Type\": \"application/json\"\n    },\n    body: {\n        mode: \"raw\",\n        raw: JSON.stringify({\n            article: {\n                title: pm.collectionVariables.get(\"getArticleTitle\"),\n                description: \"Article created for GET test\",\n                body: \"This article is created before the GET request.\",\n                tagList: [\"testing\"]\n            }\n        })\n    }\n}, function (error, response) {\n    if (!error) {\n        const data = response.json();\n        pm.collectionVariables.set(\"getArticleSlug\", data.article.slug);\n    }\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/articles/{{getArticleSlug}}",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "articles",
+                "{{getArticleSlug}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get articles",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Assert response status code is 200\", function () {\n    pm.response.to.have.status(200);\n});\n\npm.test(\"Assert response time is less than 1000ms\", function () {\n    pm.expect(pm.response.responseTime).to.be.below(1000);\n});\n\npm.test(\"Assert articles are returned\", function () {\n    const response = pm.response.json();\n\n    pm.expect(response.articles).to.exist;\n    pm.expect(response.articles).to.be.an(\"array\");\n});\n\npm.test(\"Assert articles count is returned\", function () {\n    const response = pm.response.json();\n\n    pm.expect(response.articlesCount).to.exist;\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/articles",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "articles"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get articles from Your feed",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Assert response status code is 200\", function () {\n    pm.response.to.have.status(200);\n});\n\npm.test(\"Assert response time is less than 1000ms\", function () {\n    pm.expect(pm.response.responseTime).to.be.below(1000);\n});\n\npm.test(\"Assert articles are returned\", function () {\n    const response = pm.response.json();\n\n    pm.expect(response.articles).to.exist;\n    pm.expect(response.articles).to.be.an(\"array\");\n});\n\npm.test(\"Assert articles count is returned\", function () {\n    const response = pm.response.json();\n\n    pm.expect(response.articlesCount).to.exist;\n});\n\npm.test(\"Assert feed contains no more than 10 articles\", function () {\n    const response = pm.response.json();\n\n    pm.expect(response.articles.length).to.be.at.most(10);\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/articles/feed?limit=10&offset=0",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "articles",
+                "feed"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "offset",
+                  "value": "0"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get articles from Global feed",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Assert response status code is 200\", function () {\n    pm.response.to.have.status(200);\n});\n\npm.test(\"Assert response time is less than 1000ms\", function () {\n    pm.expect(pm.response.responseTime).to.be.below(1000);\n});\n\npm.test(\"Assert articles are returned\", function () {\n    const response = pm.response.json();\n\n    pm.expect(response.articles).to.exist;\n    pm.expect(response.articles).to.be.an(\"array\");\n});\n\npm.test(\"Assert articles count is returned\", function () {\n    const response = pm.response.json();\n\n    pm.expect(response.articlesCount).to.exist;\n});\n\npm.test(\"Assert global feed contains no more than 10 articles\", function () {\n    const response = pm.response.json();\n\n    pm.expect(response.articles.length).to.be.at.most(10);\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/articles?limit=10&offset=0",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "articles"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "offset",
+                  "value": "0"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get articles by tag",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Assert response status code is 200\", function () {\n    pm.response.to.have.status(200);\n});\n\npm.test(\"Assert response time is less than 1000ms\", function () {\n    pm.expect(pm.response.responseTime).to.be.below(1000);\n});\n\npm.test(\"Assert articles are returned\", function () {\n    const response = pm.response.json();\n\n    pm.expect(response.articles).to.exist;\n    pm.expect(response.articles).to.be.an(\"array\");\n});\n\npm.test(\"Assert articles count is returned\", function () {\n    const response = pm.response.json();\n\n    pm.expect(response.articlesCount).to.exist;\n});\n\npm.test(\"Assert returned articles have the requested tag\", function () {\n    const response = pm.response.json();\n\n    response.articles.forEach(function (article) {\n        pm.expect(article.tagList).to.include(\"testing\");\n    });\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/articles?limit=10&tag=testing&offset=0",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "articles"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "tag",
+                  "value": "testing"
+                },
+                {
+                  "key": "offset",
+                  "value": "0"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create an article without authorization",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Assert response status code is 401\", function () {\n    pm.response.to.have.status(401);\n});\n\npm.test(\"Assert response time is less than 1000ms\", function () {\n    pm.expect(pm.response.responseTime).to.be.below(1000);\n});\n\npm.test(\"Assert response body is Unauthorized\", function () {\n    pm.expect(pm.response.text().trim()).to.eql(\"Unauthorized\");\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"article\": {\n    \"title\": \"Unauthorized Article Test\",\n    \"description\": \"Testing article creation without authorization\",\n    \"body\": \"This article should not be created.\",\n    \"tagList\": [\n      \"testing\"\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/articles",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "articles"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete an article without authorization",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Assert response status code is 401\", function () {\n    pm.response.to.have.status(401);\n});\n\npm.test(\"Assert response time is less than 1000ms\", function () {\n    pm.expect(pm.response.responseTime).to.be.below(1000);\n});\n\npm.test(\"Assert response body is Unauthorized\", function () {\n    pm.expect(pm.response.text().trim()).to.eql(\"Unauthorized\");\n});"
+                ]
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.sendRequest({\n    url: `${pm.collectionVariables.get(\"url\")}/articles`,\n    method: \"POST\",\n    header: {\n        \"Authorization\": `Token ${pm.collectionVariables.get(\"token\")}`,\n        \"Content-Type\": \"application/json\"\n    },\n    body: {\n        mode: \"raw\",\n        raw: JSON.stringify({\n            article: {\n                title: `Article for unauthorized delete ${Date.now()}`,\n                description: \"Test article\",\n                body: \"This article is created for authorization testing.\",\n                tagList: [\"testing\"]\n            }\n        })\n    }\n}, function (error, response) {\n    if (!error) {\n        const data = response.json();\n        pm.collectionVariables.set(\"unauthorizedDeleteSlug\", data.article.slug);\n    }\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/articles/{{unauthorizedDeleteSlug}}",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "articles",
+                "{{unauthorizedDeleteSlug}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete another user’s article",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.sendRequest({\n    url: `${pm.collectionVariables.get(\"url\")}/users`,\n    method: \"POST\",\n    header: {\n        \"Content-Type\": \"application/json\"\n    },\n    body: {\n        mode: \"raw\",\n        raw: JSON.stringify({\n            user: {\n                username: `otheruser${Date.now()}`,\n                email: `otheruser${Date.now()}@test.com`,\n                password: pm.collectionVariables.get(\"passwordConduit\")\n            }\n        })\n    }\n}, function (error, response) {\n\n    if (error) {\n        console.log(\"Error creating second user:\", error);\n        return;\n    }\n\n    const data = response.json();\n    const otherToken = data.user.token;\n\n    pm.collectionVariables.set(\"otherUserToken\", otherToken);\n\n    // Create an article owned by the second user\n    pm.sendRequest({\n        url: `${pm.collectionVariables.get(\"url\")}/articles`,\n        method: \"POST\",\n        header: {\n            \"Authorization\": `Token ${otherToken}`,\n            \"Content-Type\": \"application/json\"\n        },\n        body: {\n            mode: \"raw\",\n            raw: JSON.stringify({\n                article: {\n                    title: `Other User Article ${Date.now()}`,\n                    description: \"Article created by another user\",\n                    body: \"This article belongs to another user.\",\n                    tagList: [\"testing\"]\n                }\n            })\n        }\n    }, function (articleError, articleResponse) {\n\n        if (articleError) {\n            console.log(\"Error creating article:\", articleError);\n            return;\n        }\n\n        const articleData = articleResponse.json();\n\n        pm.collectionVariables.set(\n            \"otherArticleSlug\",\n            articleData.article.slug\n        );\n    });\n});"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Assert response status code is 403\", function () {\n    pm.response.to.have.status(403);\n});\n\npm.test(\"Assert response time is less than 1000ms\", function () {\n    pm.expect(pm.response.responseTime).to.be.below(1000);\n});\n\npm.test(\"Assert response body is Forbidden\", function () {\n    pm.expect(pm.response.text().trim()).to.eql(\"Forbidden\");\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/articles/{{otherArticleSlug}}",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "articles",
+                "{{otherArticleSlug}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete non-existing article",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Assert response status code is 404\", function () {\n    pm.response.to.have.status(404);\n});\n\npm.test(\"Assert response time is less than 1000ms\", function () {\n    pm.expect(pm.response.responseTime).to.be.below(1000);\n});\n\npm.test(\"Assert response body is Not Found\", function () {\n    pm.expect(pm.response.text().trim()).to.eql(\"Not Found\");\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/articles/article-that-does-not-exist-{{timestamp}}",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "articles",
+                "article-that-does-not-exist-{{timestamp}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Profile",
+      "item": [
+        {
+          "name": "Get profile",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Assert response status code is 200\", function () {\n    pm.response.to.have.status(200);\n});\n\npm.test(\"Assert response time is less than 1000ms\", function () {\n    pm.expect(pm.response.responseTime).to.be.below(1000);\n});\n\npm.test(\"Assert profile is returned\", function () {\n    const response = pm.response.json();\n    pm.expect(response.profile).to.exist;\n});\n\npm.test(\"Assert profile has required properties\", function () {\n    const response = pm.response.json();\n\n    pm.expect(response.profile).to.have.property(\"username\");\n    pm.expect(response.profile).to.have.property(\"bio\");\n    pm.expect(response.profile).to.have.property(\"image\");\n    pm.expect(response.profile).to.have.property(\"following\");\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/profiles/updateduser",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "profiles",
+                "updateduser"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Follow profile",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const timestamp = Date.now();\n\nconst otherUsername = `followuser${timestamp}`;\nconst otherEmail = `followuser${timestamp}@test.com`;\n\npm.collectionVariables.set(\"otherUsername\", otherUsername);\n\npm.sendRequest({\n    url: `${pm.collectionVariables.get(\"url\")}/users`,\n    method: \"POST\",\n    header: {\n        \"Content-Type\": \"application/json\"\n    },\n    body: {\n        mode: \"raw\",\n        raw: JSON.stringify({\n            user: {\n                username: otherUsername,\n                email: otherEmail,\n                password: pm.collectionVariables.get(\"passwordConduit\")\n            }\n        })\n    }\n}, function (error, response) {\n\n    if (error) {\n        console.log(\"Error creating user:\", error);\n        return;\n    }\n\n    const data = response.json();\n\n    pm.collectionVariables.set(\n        \"otherUserToken\",\n        data.user.token\n    );\n});"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Assert response status code is 200\", function () {\n    pm.response.to.have.status(200);\n});\n\npm.test(\"Assert response time is less than 1000ms\", function () {\n    pm.expect(pm.response.responseTime).to.be.below(1000);\n});\n\npm.test(\"Assert profile is returned\", function () {\n    const response = pm.response.json();\n    pm.expect(response.profile).to.exist;\n});\n\npm.test(\"Assert profile is following\", function () {\n    const response = pm.response.json();\n    pm.expect(response.profile.following).to.eql(true);\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/profiles/{{otherUsername}}/follow",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "profiles",
+                "{{otherUsername}}",
+                "follow"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Unfollow profile",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Assert response status code is 200\", function () {\n    pm.response.to.have.status(200);\n});\n\npm.test(\"Assert response time is less than 1000ms\", function () {\n    pm.expect(pm.response.responseTime).to.be.below(1000);\n});\n\npm.test(\"Assert profile is returned\", function () {\n    const response = pm.response.json();\n    pm.expect(response.profile).to.exist;\n});\n\npm.test(\"Assert profile is not following\", function () {\n    const response = pm.response.json();\n    pm.expect(response.profile.following).to.eql(false);\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/profiles/{{otherUsername}}/follow",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "profiles",
+                "{{otherUsername}}",
+                "follow"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Tags",
+      "item": [
+        {
+          "name": "Get tags",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Assert response status code is 200\", function () {\n    pm.response.to.have.status(200);\n});\n\npm.test(\"Assert response time is less than 1000ms\", function () {\n    pm.expect(pm.response.responseTime).to.be.below(1000);\n});\n\npm.test(\"Assert tags are returned\", function () {\n    const response = pm.response.json();\n    pm.expect(response.tags).to.exist;\n});\n\npm.test(\"Assert tags is an array\", function () {\n    const response = pm.response.json();\n    pm.expect(response.tags).to.be.an(\"array\");\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/tags",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "tags"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Comments",
+      "item": [
+        {
+          "name": "Get comments",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.sendRequest({\n    url: `${pm.collectionVariables.get(\"url\")}/articles`,\n    method: \"POST\",\n    header: {\n        \"Authorization\": `Token ${pm.collectionVariables.get(\"token\")}`,\n        \"Content-Type\": \"application/json\"\n    },\n    body: {\n        mode: \"raw\",\n        raw: JSON.stringify({\n            article: {\n                title: `Article for comments ${Date.now()}`,\n                description: \"Article for comment tests\",\n                body: \"This article is used for testing comments.\",\n                tagList: [\"testing\"]\n            }\n        })\n    }\n}, function (error, response) {\n\n    if (error) {\n        console.log(\"Error creating article:\", error);\n        return;\n    }\n\n    const data = response.json();\n\n    pm.collectionVariables.set(\n        \"commentsArticleSlug\",\n        data.article.slug\n    );\n});"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Assert response status code is 200\", function () {\n    pm.response.to.have.status(200);\n});\n\npm.test(\"Assert response time is less than 1000ms\", function () {\n    pm.expect(pm.response.responseTime).to.be.below(1000);\n});\n\npm.test(\"Assert comments are returned\", function () {\n    const response = pm.response.json();\n    pm.expect(response.comments).to.exist;\n});\n\npm.test(\"Assert comments is an array\", function () {\n    const response = pm.response.json();\n    pm.expect(response.comments).to.be.an(\"array\");\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/articles/{{commentsArticleSlug}}/comments",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "articles",
+                "{{commentsArticleSlug}}",
+                "comments"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Post comment",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Assert response status code is 200\", function () {\n    pm.response.to.have.status(200);\n});\n\npm.test(\"Assert response time is less than 1000ms\", function () {\n    pm.expect(pm.response.responseTime).to.be.below(1000);\n});\n\npm.test(\"Assert comment is returned\", function () {\n    const response = pm.response.json();\n    pm.expect(response.comment).to.exist;\n});\n\npm.test(\"Assert comment body is correct\", function () {\n    const response = pm.response.json();\n\n    pm.expect(response.comment.body).to.eql(\n        \"This is a test comment created with Postman.\"\n    );\n});\n\nconst response = pm.response.json();\n\npm.collectionVariables.set(\n    \"commentId\",\n    response.comment.id\n);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"comment\": {\n    \"body\": \"This is a test comment created with Postman.\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/articles/{{commentsArticleSlug}}/comments",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "articles",
+                "{{commentsArticleSlug}}",
+                "comments"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete comment",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Assert response status code is 204\", function () {\n    pm.response.to.have.status(204);\n});\n\npm.test(\"Assert response time is less than 1000ms\", function () {\n    pm.expect(pm.response.responseTime).to.be.below(1000);\n});\n\npm.test(\"Assert response body is empty\", function () {\n    pm.expect(pm.response.text()).to.eql(\"\");\n});"
+                ]
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const url = pm.collectionVariables.get(\"url\");\nconst token = pm.collectionVariables.get(\"token\");\n\npm.sendRequest({\n    url: `${url}/articles`,\n    method: \"POST\",\n    header: {\n        \"Authorization\": `Token ${token}`,\n        \"Content-Type\": \"application/json\"\n    },\n    body: {\n        mode: \"raw\",\n        raw: JSON.stringify({\n            article: {\n                title: `Delete Comment Test ${Date.now()}`,\n                description: \"Article for delete comment test\",\n                body: \"Article created specifically for testing comment deletion.\",\n                tagList: [\"testing\"]\n            }\n        })\n    }\n}, function (articleError, articleResponse) {\n\n    if (articleError) {\n        console.log(articleError);\n        return;\n    }\n\n    const articleData = articleResponse.json();\n    const slug = articleData.article.slug;\n\n    pm.collectionVariables.set(\"deleteCommentArticleSlug\", slug);\n\n    pm.sendRequest({\n        url: `${url}/articles/${slug}/comments`,\n        method: \"POST\",\n        header: {\n            \"Authorization\": `Token ${token}`,\n            \"Content-Type\": \"application/json\"\n        },\n        body: {\n            mode: \"raw\",\n            raw: JSON.stringify({\n                comment: {\n                    body: `Comment to delete ${Date.now()}`\n                }\n            })\n        }\n    }, function (commentError, commentResponse) {\n\n        if (commentError) {\n            console.log(commentError);\n            return;\n        }\n\n        const commentData = commentResponse.json();\n\n        pm.collectionVariables.set(\n            \"deleteCommentId\",\n            commentData.comment.id\n        );\n    });\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/articles/{{deleteCommentArticleSlug}}/comments/{{deleteCommentId}}",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "articles",
+                "{{deleteCommentArticleSlug}}",
+                "comments",
+                "{{deleteCommentId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete another user’s comment",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const url = pm.collectionVariables.get(\"url\");\nconst otherToken = pm.collectionVariables.get(\"otherUserToken\");\n\npm.sendRequest({\n    url: `${url}/articles`,\n    method: \"POST\",\n    header: {\n        \"Authorization\": `Token ${otherToken}`,\n        \"Content-Type\": \"application/json\"\n    },\n    body: {\n        mode: \"raw\",\n        raw: JSON.stringify({\n            article: {\n                title: `Article for other user comment ${Date.now()}`,\n                description: \"Article for testing comment ownership\",\n                body: \"Article created by another user.\",\n                tagList: [\"testing\"]\n            }\n        })\n    }\n}, function (articleError, articleResponse) {\n\n    if (articleError) {\n        console.log(\"Error creating article:\", articleError);\n        return;\n    }\n\n    const articleData = articleResponse.json();\n    const slug = articleData.article.slug;\n\n    pm.collectionVariables.set(\n        \"otherCommentArticleSlug\",\n        slug\n    );\n\n    pm.sendRequest({\n        url: `${url}/articles/${slug}/comments`,\n        method: \"POST\",\n        header: {\n            \"Authorization\": `Token ${otherToken}`,\n            \"Content-Type\": \"application/json\"\n        },\n        body: {\n            mode: \"raw\",\n            raw: JSON.stringify({\n                comment: {\n                    body: \"Comment created by another user.\"\n                }\n            })\n        }\n    }, function (commentError, commentResponse) {\n\n        if (commentError) {\n            console.log(\"Error creating comment:\", commentError);\n            return;\n        }\n\n        const commentData = commentResponse.json();\n\n        pm.collectionVariables.set(\n            \"otherCommentId\",\n            commentData.comment.id\n        );\n    });\n});"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Assert response status code is 403\", function () {\n    pm.response.to.have.status(403);\n});\n\npm.test(\"Assert response time is less than 1000ms\", function () {\n    pm.expect(pm.response.responseTime).to.be.below(1000);\n});\n\npm.test(\"Assert response body is Forbidden\", function () {\n    pm.expect(pm.response.text().trim()).to.eql(\"Forbidden\");\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/articles/{{otherCommentArticleSlug}}/comments/{{otherCommentId}}",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "articles",
+                "{{otherCommentArticleSlug}}",
+                "comments",
+                "{{otherCommentId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete comment without authorization",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const url = pm.collectionVariables.get(\"url\");\nconst token = pm.collectionVariables.get(\"token\");\n\npm.sendRequest({\n    url: `${url}/articles`,\n    method: \"POST\",\n    header: {\n        \"Authorization\": `Token ${token}`,\n        \"Content-Type\": \"application/json\"\n    },\n    body: {\n        mode: \"raw\",\n        raw: JSON.stringify({\n            article: {\n                title: `Article for unauthorized comment ${Date.now()}`,\n                description: \"Article for authorization test\",\n                body: \"Article created for testing unauthorized comment deletion.\",\n                tagList: [\"testing\"]\n            }\n        })\n    }\n}, function (articleError, articleResponse) {\n\n    if (articleError) {\n        console.log(\"Error creating article:\", articleError);\n        return;\n    }\n\n    const articleData = articleResponse.json();\n    const slug = articleData.article.slug;\n\n    pm.collectionVariables.set(\n        \"unauthorizedCommentArticleSlug\",\n        slug\n    );\n\n    pm.sendRequest({\n        url: `${url}/articles/${slug}/comments`,\n        method: \"POST\",\n        header: {\n            \"Authorization\": `Token ${token}`,\n            \"Content-Type\": \"application/json\"\n        },\n        body: {\n            mode: \"raw\",\n            raw: JSON.stringify({\n                comment: {\n                    body: \"Comment for unauthorized delete test.\"\n                }\n            })\n        }\n    }, function (commentError, commentResponse) {\n\n        if (commentError) {\n            console.log(\"Error creating comment:\", commentError);\n            return;\n        }\n\n        const commentData = commentResponse.json();\n\n        pm.collectionVariables.set(\n            \"unauthorizedCommentId\",\n            commentData.comment.id\n        );\n    });\n});"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Assert response status code is 401\", function () {\n    pm.response.to.have.status(401);\n});\n\npm.test(\"Assert response time is less than 1000ms\", function () {\n    pm.expect(pm.response.responseTime).to.be.below(1000);\n});\n\npm.test(\"Assert response body is Unauthorized\", function () {\n    pm.expect(pm.response.text().trim()).to.eql(\"Unauthorized\");\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/articles/{{unauthorizedCommentArticleSlug}}/comments/{{unauthorizedCommentId}}",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "articles",
+                "{{unauthorizedCommentArticleSlug}}",
+                "comments",
+                "{{unauthorizedCommentId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "exec": [
+          "// ============================================",
+          "// DADOS BASE DO USUÁRIO",
+          "// ============================================",
+          "",
+          "if (!pm.collectionVariables.get(\"username\")) {",
+          "    const timestamp = Date.now();",
+          "",
+          "    pm.collectionVariables.set(\"timestamp\", timestamp);",
+          "",
+          "    const username = `testuser${timestamp}`;",
+          "    pm.collectionVariables.set(\"username\", username);",
+          "",
+          "    const email = `testuser${timestamp}@test.com`;",
+          "    pm.collectionVariables.set(\"email\", email);",
+          "}",
+          "",
+          "",
+          "// ============================================",
+          "// HELPER: CRIAR USUÁRIO",
+          "// ============================================",
+          "",
+          "function createUser(callback) {",
+          "    const timestamp = Date.now();",
+          "    const username = `testuser${timestamp}`;",
+          "    const email = `testuser${timestamp}@test.com`;",
+          "",
+          "    pm.sendRequest({",
+          "        url: `${pm.collectionVariables.get(\"url\")}/users`,",
+          "        method: \"POST\",",
+          "        header: {",
+          "            \"Content-Type\": \"application/json\"",
+          "        },",
+          "        body: {",
+          "            mode: \"raw\",",
+          "            raw: JSON.stringify({",
+          "                user: {",
+          "                    username: username,",
+          "                    email: email,",
+          "                    password: pm.collectionVariables.get(\"passwordConduit\")",
+          "                }",
+          "            })",
+          "        }",
+          "    }, function (error, response) {",
+          "",
+          "        if (error) {",
+          "            console.log(\"Erro ao criar usuário:\", error);",
+          "            return;",
+          "        }",
+          "",
+          "        if (response.code === 200) {",
+          "            const data = response.json();",
+          "",
+          "            pm.collectionVariables.set(\"username\", data.user.username);",
+          "            pm.collectionVariables.set(\"email\", data.user.email);",
+          "            pm.collectionVariables.set(\"token\", data.user.token);",
+          "",
+          "            console.log(\"Usuário criado:\", data.user.username);",
+          "",
+          "            if (callback) {",
+          "                callback(data.user);",
+          "            }",
+          "        } else {",
+          "            console.log(\"Erro ao criar usuário. Status:\", response.code);",
+          "        }",
+          "    });",
+          "}",
+          "",
+          "",
+          "// ============================================",
+          "// HELPER: CRIAR ARTIGO",
+          "// ============================================",
+          "",
+          "function createArticle(token, callback) {",
+          "    const timestamp = Date.now();",
+          "",
+          "    const title = `Test Article ${timestamp}`;",
+          "    const description = `Test description ${timestamp}`;",
+          "    const body = `Test body ${timestamp}`;",
+          "",
+          "    pm.sendRequest({",
+          "        url: `${pm.collectionVariables.get(\"url\")}/articles`,",
+          "        method: \"POST\",",
+          "        header: {",
+          "            \"Content-Type\": \"application/json\",",
+          "            \"Authorization\": `Token ${token}`",
+          "        },",
+          "        body: {",
+          "            mode: \"raw\",",
+          "            raw: JSON.stringify({",
+          "                article: {",
+          "                    title: title,",
+          "                    description: description,",
+          "                    body: body,",
+          "                    tagList: [\"test\"]",
+          "                }",
+          "            })",
+          "        }",
+          "    }, function (error, response) {",
+          "",
+          "        if (error) {",
+          "            console.log(\"Erro ao criar artigo:\", error);",
+          "            return;",
+          "        }",
+          "",
+          "        if (response.code === 200) {",
+          "            const data = response.json();",
+          "            const article = data.article;",
+          "",
+          "            pm.collectionVariables.set(\"articleSlug\", article.slug);",
+          "",
+          "            console.log(\"Artigo criado:\", article.slug);",
+          "",
+          "            if (callback) {",
+          "                callback(article);",
+          "            }",
+          "        } else {",
+          "            console.log(\"Erro ao criar artigo. Status:\", response.code);",
+          "        }",
+          "    });",
+          "}",
+          "",
+          "",
+          "// ============================================",
+          "// HELPER: CRIAR COMENTÁRIO",
+          "// ============================================",
+          "",
+          "function createComment(token, articleSlug, callback) {",
+          "    const commentBody = `Test comment ${Date.now()}`;",
+          "",
+          "    pm.sendRequest({",
+          "        url: `${pm.collectionVariables.get(\"url\")}/articles/${articleSlug}/comments`,",
+          "        method: \"POST\",",
+          "        header: {",
+          "            \"Content-Type\": \"application/json\",",
+          "            \"Authorization\": `Token ${token}`",
+          "        },",
+          "        body: {",
+          "            mode: \"raw\",",
+          "            raw: JSON.stringify({",
+          "                comment: {",
+          "                    body: commentBody",
+          "                }",
+          "            })",
+          "        }",
+          "    }, function (error, response) {",
+          "",
+          "        if (error) {",
+          "            console.log(\"Erro ao criar comentário:\", error);",
+          "            return;",
+          "        }",
+          "",
+          "        if (response.code === 200) {",
+          "            const data = response.json();",
+          "            const comment = data.comment;",
+          "",
+          "            pm.collectionVariables.set(\"commentld\", comment.id);",
+          "",
+          "            console.log(\"Comentário criado:\", comment.id);",
+          "",
+          "            if (callback) {",
+          "                callback(comment);",
+          "            }",
+          "        } else {",
+          "            console.log(\"Erro ao criar comentário. Status:\", response.code);",
+          "        }",
+          "    });",
+          "}",
+          "",
+          "",
+          "// ============================================",
+          "// HELPER: EXCLUIR ARTIGO",
+          "// ============================================",
+          "",
+          "function deleteArticle(slug, token) {",
+          "    if (!slug || !token) {",
+          "        console.log(\"Não foi possível excluir o artigo: slug ou token ausente.\");",
+          "        return;",
+          "    }",
+          "",
+          "    pm.sendRequest({",
+          "        url: `${pm.collectionVariables.get(\"url\")}/articles/${slug}`,",
+          "        method: \"DELETE\",",
+          "        header: {",
+          "            \"Authorization\": `Token ${token}`",
+          "        }",
+          "    }, function (error, response) {",
+          "",
+          "        if (error) {",
+          "            console.log(\"Erro ao excluir artigo:\", error);",
+          "        } else {",
+          "            console.log(`Limpeza do artigo: status ${response.code}`);",
+          "        }",
+          "    });",
+          "}"
+        ],
+        "type": "text/javascript"
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "url",
+      "value": ""
+    },
+    {
+      "key": "passwordConduit",
+      "value": ""
+    },
+    {
+      "key": "timestamp",
+      "value": ""
+    },
+    {
+      "key": "username",
+      "value": ""
+    },
+    {
+      "key": "email",
+      "value": ""
+    },
+    {
+      "key": "token",
+      "value": ""
+    },
+    {
+      "key": "takenUsername",
+      "value": ""
+    },
+    {
+      "key": "takenEmail",
+      "value": ""
+    },
+    {
+      "key": "articleSlug",
+      "value": ""
+    },
+    {
+      "key": "getArticleTitle",
+      "value": ""
+    },
+    {
+      "key": "getArticleSlug",
+      "value": ""
+    },
+    {
+      "key": "unauthorizedDeleteSlug",
+      "value": ""
+    },
+    {
+      "key": "otherUserToken",
+      "value": ""
+    },
+    {
+      "key": "otherArticleSlug",
+      "value": ""
+    },
+    {
+      "key": "otherUsername",
+      "value": ""
+    },
+    {
+      "key": "commentsArticleSlug",
+      "value": ""
+    },
+    {
+      "key": "commentId",
+      "value": ""
+    },
+    {
+      "key": "deleteCommentId",
+      "value": ""
+    },
+    {
+      "key": "deleteCommentArticleSlug",
+      "value": ""
+    },
+    {
+      "key": "otherCommentArticleSlug",
+      "value": ""
+    },
+    {
+      "key": "otherCommentId",
+      "value": ""
+    },
+    {
+      "key": "unauthorizedCommentArticleSlug",
+      "value": ""
+    },
+    {
+      "key": "unauthorizedCommentId",
+      "value": ""
+    }
+  ]
+}
