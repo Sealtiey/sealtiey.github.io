@@ -46,7 +46,7 @@ nav ul a{white-space:nowrap}
 @media (max-width:720px){nav ul{display:none}}
 
 /* hero */
-.hero{padding:72px 0 56px}
+.hero{padding:72px 16px 56px}
 .tag{display:inline-flex;align-items:center;gap:8px;background:var(--accent-soft);color:var(--accent);font-weight:600;font-size:.82rem;padding:5px 12px;border-radius:999px}
 .tag::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--pass)}
 h1{font-size:clamp(2.1rem,5vw,3.3rem);line-height:1.1;margin:18px 0 12px;letter-spacing:-.02em}
@@ -187,6 +187,10 @@ details.shot figure{margin:10px 0 0}
 details.shot img{max-width:720px}
 
 @media (min-width:960px){.samples{grid-template-columns:1fr 1fr;align-items:start}.samples>.card{grid-column:1/-1}}
+
+.hero-grid{display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center}
+.avatar{width:220px;height:220px;border-radius:50%;object-fit:cover;border:4px solid var(--surface);box-shadow:0 0 0 2px var(--accent),var(--shadow)}
+@media (max-width:720px){.hero-grid{grid-template-columns:1fr;gap:20px}.avatar{order:-1;width:120px;height:120px}}
 </style>
 </head>
 <body>
@@ -208,15 +212,20 @@ details.shot img{max-width:720px}
 
 <main id="top">
   <div class="wrap hero">
-    <span class="tag">Disponível para vagas de QA Júnior · Remoto</span>
-    <h1>Sealtiey Menegassi</h1>
-    <p class="role">Analista de QA Júnior · Testes Manuais Web e Mobile, API e SQL</p>
-    <p class="lead">Passei mais de 9 anos em recrutamento, 6 deles contratando times de tecnologia, inclusive QAs. Conheço por dentro o que um time de produto espera de quem testa. Agora sou eu quem testa: escrevo planos e casos de teste, executo testes em web e mobile e encontro e documento bugs com clareza.</p>
-    <div class="btns">
-      <a class="btn primary" href="#huntd">Ver meu trabalho</a>
-      <a class="btn" href="assets/CV_Sealtiey_Menegassi_QA.pdf" download aria-label="Baixar currículo em PDF">Currículo (PDF)</a>
-      <a class="btn" href="https://www.linkedin.com/in/sealtieymenegassi/" target="_blank" rel="noopener">LinkedIn</a>
-      <a class="btn" href="https://github.com/Sealtiey" target="_blank" rel="noopener">GitHub</a>
+    <div class="hero-grid">
+      <div class="hero-text">
+      <span class="tag">Disponível para vagas de QA Júnior · Remoto</span>
+      <h1>Sealtiey Menegassi</h1>
+      <p class="role">Analista de QA Júnior · Testes Manuais Web e Mobile, API e SQL</p>
+      <p class="lead">Passei mais de 9 anos em recrutamento, 6 deles contratando times de tecnologia, inclusive QAs. Conheço por dentro o que um time de produto espera de quem testa. Agora sou eu quem testa: escrevo planos e casos de teste, executo testes em web e mobile e encontro e documento bugs com clareza.</p>
+      <div class="btns">
+        <a class="btn primary" href="#huntd">Ver meu trabalho</a>
+        <a class="btn" href="assets/CV_Sealtiey_Menegassi_QA.pdf" download aria-label="Baixar currículo em PDF">Currículo (PDF)</a>
+        <a class="btn" href="https://www.linkedin.com/in/sealtieymenegassi/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="https://github.com/Sealtiey" target="_blank" rel="noopener">GitHub</a>
+      </div>
+      </div>
+      <img class="avatar" src="assets/foto-sealtiey.jpg" alt="Foto de Sealtiey Menegassi" width="220" height="220">
     </div>
   </div>
 
