@@ -4,7 +4,26 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sealtiey Menegassi · QA</title>
-<meta name="description" content="Portfólio de Sealtiey Menegassi, Analista de QA Júnior: testes web e mobile, API, SQL e automação com Playwright.">
+<meta name="description" content="Portfólio de Sealtiey Menegassi, Analista de QA Júnior: testes manuais web e mobile, testes de API com Postman, SQL, Jira, TestRail e Playwright (em aprendizado). Ex-Tech Recruiter.">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Sealtiey Menegassi · Analista de QA Júnior">
+<meta property="og:description" content="Portfólio de QA: estudo de caso completo do Huntd (155 casos de teste), testes de API do Conduit no Postman (157 verificações), bugs e SQL.">
+<meta property="og:url" content="https://sealtiey.github.io/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Sealtiey Menegassi",
+  "jobTitle": "Analista de QA Júnior",
+  "description": "QA com formação prática pela Mate Academy em testes manuais web e mobile, testes de API, SQL, Jira e TestRail. Antes, 5 anos como Tech Recruiter.",
+  "address": {"@type": "PostalAddress", "addressLocality": "Maceió", "addressRegion": "AL", "addressCountry": "BR"},
+  "email": "mailto:sealtieyam@gmail.com",
+  "url": "https://sealtiey.github.io/",
+  "sameAs": ["https://www.linkedin.com/in/sealtieymenegassi/", "https://github.com/Sealtiey"],
+  "alumniOf": [{"@type": "EducationalOrganization", "name": "Mate Academy"}, {"@type": "CollegeOrUniversity", "name": "Unipar - Universidade Paranaense"}],
+  "knowsAbout": ["Quality Assurance", "Testes manuais", "Testes de API", "Testes mobile", "Testes de regressão", "Casos de teste", "Plano de teste", "Bug report", "Jira", "TestRail", "Postman", "SQL", "Chrome DevTools", "Android Studio", "Playwright"]
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -171,6 +190,8 @@ details.shot summary::before{content:"▸";transition:transform .15s}
 details.shot[open] summary::before{transform:rotate(90deg)}
 details.shot figure{margin:10px 0 0}
 details.shot img{max-width:720px}
+details.more-certs{margin-top:12px}
+details.more-certs .certs{margin-top:10px}
 
 @media (min-width:960px){.samples{grid-template-columns:1fr 1fr;align-items:start}.samples>.card{grid-column:1/-1}}
 
@@ -210,7 +231,7 @@ main{position:relative}
       <span class="tag">Disponível para vagas de QA Júnior · Remoto</span>
       <h1>Sealtiey Menegassi</h1>
       <p class="role">Analista de QA Júnior · Testes Manuais Web e Mobile, API e SQL</p>
-      <p class="lead">Passei mais de 9 anos em recrutamento, 6 deles contratando times de tecnologia, inclusive QAs. Conheço por dentro o que um time de produto espera de quem testa. Agora sou eu quem testa: escrevo planos e casos de teste, executo testes em web e mobile e encontro e documento bugs com clareza.</p>
+      <p class="lead">QA com formação prática pela Mate Academy: escrevo planos e casos de teste, executo testes em web, mobile e API e documento bugs com clareza. Antes, atuei 5 anos como Tech Recruiter contratando times de tecnologia, inclusive QAs, e conheço por dentro o que um time de produto espera de quem testa.</p>
       <div class="btns">
         <a class="btn primary" href="#huntd">Ver meu trabalho</a>
         <a class="btn" href="assets/CV_Sealtiey_Menegassi_QA.pdf" download aria-label="Baixar currículo em PDF">Currículo (PDF)</a>
@@ -548,7 +569,7 @@ pm.<span class="kw">test</span>("Assert response body is Forbidden", () => {
             <li>Exercícios guiados em Coffee Cart, Conduit e Wizard Bank</li>
             <li>Conceitos de locators, assertions e Page Object Model</li>
           </ul>
-          <div class="chips"><span class="chip">Playwright</span><span class="chip">Noções</span></div>
+          <div class="chips"><span class="chip">Playwright</span><span class="chip">Em aprendizado</span></div>
         </article>
       </div>
       <p class="sub" style="margin:24px 0 0">Também pratiquei caça a bugs em mais de 15 sites reais e de treino, como DemoBlaze, Juice Shop, Domino's, Booked.net e Stellarium.</p>
@@ -558,7 +579,7 @@ pm.<span class="kw">test</span>("Assert response body is Forbidden", () => {
   <section id="sobre">
     <div class="wrap">
       <h2>De recrutadora a QA</h2>
-      <p class="sub">Passei mais de 9 anos em recrutamento, 6 deles contratando para tecnologia. No dia a dia eu alinhava requisitos com gestores técnicos antes de buscar candidatos. Hoje faço o mesmo antes de escrever casos de teste. Estas habilidades vieram comigo:</p>
+      <p class="sub">Atuei 5 anos como Tech Recruiter, contratando para tecnologia. No dia a dia eu alinhava requisitos com gestores técnicos antes de buscar candidatos. Hoje faço o mesmo antes de escrever casos de teste. Estas habilidades vieram comigo:</p>
       <div class="diff">
         <div class="card"><strong>Investigação</strong><p>Fazer as perguntas certas, desconfiar do óbvio e ir atrás do detalhe que ninguém viu, agora aplicado a requisitos e fluxos.</p></div>
         <div class="card"><strong>Comunicação clara</strong><p>Anos dando feedback para candidatos e clientes. Meus bug reports são objetivos, reproduzíveis e sem ruído.</p></div>
@@ -588,24 +609,30 @@ pm.<span class="kw">test</span>("Assert response body is Forbidden", () => {
         <div class="card skill-group">
           <h3>Técnico</h3>
           <div class="chips">
-            <span class="chip">SQL (JOIN, GROUP BY)</span><span class="chip">APIs REST</span><span class="chip">HTML e CSS</span><span class="chip">JavaScript básico</span><span class="chip">Noções de automação (Playwright)</span>
+            <span class="chip">SQL (JOIN, GROUP BY)</span><span class="chip">APIs REST</span><span class="chip">HTML e CSS</span><span class="chip">JavaScript básico</span><span class="chip">Playwright (em aprendizado)</span>
           </div>
         </div>
       </div>
-      <p class="sub" style="margin:16px 0 0;font-size:.92rem">Também: uso de IA no trabalho com validação das respostas, ética em QA e gestão de estresse.</p>
+      <p class="sub" style="margin:16px 0 0;font-size:.92rem"><strong style="color:var(--text)">Inglês:</strong> pré-intermediário, em evolução. Casos de teste e bug reports escritos em inglês.</p>
+      <p class="sub" style="margin:6px 0 0;font-size:.92rem">Também: uso de IA no trabalho com validação das respostas e ética em QA.</p>
     </div>
   </section>
 
   <section id="certificados">
     <div class="wrap">
       <h2>Formação e certificados</h2>
-      <p class="sub">Trilha de QA da Mate Academy. Clique em um certificado para abrir o PDF.</p>
+      <p class="sub">Trilha de QA da Mate Academy, desde fev/2025, com todos os módulos concluídos. Clique em um certificado para abrir o PDF.</p>
       <ul class="certs">
         <li><a href="assets/certificados/qa-theory.pdf" target="_blank" rel="noopener"><span>QA Theory</span><span class="cert-org">Mate Academy · PDF ↗</span></a></li>
         <li><a href="assets/certificados/testing-web-applications.pdf" target="_blank" rel="noopener"><span>Testing Web Applications</span><span class="cert-org">Mate Academy · PDF ↗</span></a></li>
         <li><a href="assets/certificados/mobile-testing.pdf" target="_blank" rel="noopener"><span>Mobile Testing</span><span class="cert-org">Mate Academy · PDF ↗</span></a></li>
-        <li><a href="assets/certificados/qa-ethics.pdf" target="_blank" rel="noopener"><span>QA Ethics</span><span class="cert-org">Mate Academy · PDF ↗</span></a></li>
         <li><a href="assets/certificados/sql-basics.pdf" target="_blank" rel="noopener"><span>SQL Basics</span><span class="cert-org">Mate Academy · PDF ↗</span></a></li>
+        <li><span><span>API Beginner</span></span><span class="cert-org">Postman</span></li>
+      </ul>
+      <details class="shot more-certs">
+        <summary>Ver todos os certificados (10)</summary>
+      <ul class="certs">
+        <li><a href="assets/certificados/qa-ethics.pdf" target="_blank" rel="noopener"><span>QA Ethics</span><span class="cert-org">Mate Academy · PDF ↗</span></a></li>
         <li><a href="assets/certificados/how-the-web-works.pdf" target="_blank" rel="noopener"><span>How The Web Works</span><span class="cert-org">Mate Academy · PDF ↗</span></a></li>
         <li><a href="assets/certificados/working-with-infrastructure.pdf" target="_blank" rel="noopener"><span>Working With Infrastructure</span><span class="cert-org">Mate Academy · PDF ↗</span></a></li>
         <li><a href="assets/certificados/git-and-terminal.pdf" target="_blank" rel="noopener"><span>Git and Terminal</span><span class="cert-org">Mate Academy · PDF ↗</span></a></li>
@@ -613,11 +640,10 @@ pm.<span class="kw">test</span>("Assert response body is Forbidden", () => {
         <li><a href="assets/certificados/new-javascript-basics.pdf" target="_blank" rel="noopener"><span>New JavaScript Basics</span><span class="cert-org">Mate Academy · PDF ↗</span></a></li>
         <li><a href="assets/certificados/javascript-basics-extended.pdf" target="_blank" rel="noopener"><span>JavaScript Basics Extended</span><span class="cert-org">Mate Academy · PDF ↗</span></a></li>
         <li><a href="assets/certificados/genai-essentials.pdf" target="_blank" rel="noopener"><span>GenAI Essentials</span><span class="cert-org">Mate Academy · PDF ↗</span></a></li>
-        <li><a href="assets/certificados/communication-stress-management.pdf" target="_blank" rel="noopener"><span>Communication and Stress Management</span><span class="cert-org">Mate Academy · PDF ↗</span></a></li>
         <li><a href="assets/certificados/course-fundamentals.pdf" target="_blank" rel="noopener"><span>Course Fundamentals</span><span class="cert-org">Mate Academy · PDF ↗</span></a></li>
         <li><span><span>HTML + CSS Basics</span></span><span class="cert-org">Mate Academy</span></li>
-        <li><span><span>API Beginner</span></span><span class="cert-org">Postman</span></li>
       </ul>
+      </details>
       <h3 style="margin:28px 0 12px;font-size:1rem">Formação acadêmica</h3>
       <ul class="certs">
         <li><span>Pós-graduação em Gestão de Projetos</span><span class="cert-org">Descomplica</span></li>
