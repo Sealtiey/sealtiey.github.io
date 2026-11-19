@@ -253,7 +253,7 @@ main{position:relative}
 
   <section id="gestorjit">
     <div class="wrap">
-      <span class="kind-label">Produto real · Em andamento</span>
+      <span class="kind-label">Produto real · Testes em andamento (atualizado em 18/11/2026)</span>
       <h2>GestorJIT: QA em um sistema de gestão de academias</h2>
       <p class="sub">Desde novembro de 2026 testo o <a href="https://gestorjit.com.br" target="_blank" rel="noopener">GestorJIT</a>, um sistema web em produção para academias, com áreas de academia, professor e aluno. Trabalho em uma equipe de 3 QAs: desenhei a suíte de testes no TestRail, executo os testes e reporto os bugs no Jira para o time de desenvolvimento.</p>
 
@@ -263,13 +263,14 @@ main{position:relative}
         <div class="stat"><strong>4</strong><span>bugs que reportei no Jira</span></div>
         <div class="stat"><strong>4 de 4</strong><span>bugs corrigidos pelo time</span></div>
       </div>
+      <p class="sub" style="margin:16px 0 0">A execução da suíte continua. Nos testes executados até agora, encontrei, documentei e reportei as 4 falhas abaixo, e o time corrigiu todas.</p>
 
       <div class="grid pair" style="margin-top:20px">
         <div class="card">
-          <h3>Bugs que encontrei</h3>
+          <h3>Falhas que encontrei e reportei</h3>
           <ul class="checks">
+            <li><span class="mono">CP-8</span> · <strong>Segurança:</strong> o login não bloqueava a conta após tentativas repetidas de senha incorreta. Sem esse bloqueio, um robô que trocasse de IP poderia continuar testando senhas até acertar e chegar a dados sensíveis de alunos, inclusive menores de idade, e às informações financeiras da academia</li>
             <li><span class="mono">CP-1</span> · <strong>Cadastro (prioridade mais alta):</strong> o link de confirmação de e-mail apontava para <code>localhost</code>, e a conta nova não era ativada</li>
-            <li><span class="mono">CP-8</span> · <strong>Segurança:</strong> o login não bloqueava a conta após tentativas repetidas de senha incorreta. No report, analisei o risco para dados de alunos, inclusive menores de idade, e dados financeiros</li>
             <li><span class="mono">CP-2</span> · <strong>Validação:</strong> o campo de telefone aceitava números inválidos</li>
             <li><span class="mono">CP-10</span> · <strong>Usabilidade:</strong> a academia não via nenhum indicador de notificação pendente quando um aluno informava um pagamento</li>
           </ul>
