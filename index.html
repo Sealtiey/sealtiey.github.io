@@ -219,6 +219,7 @@ main{position:relative}
   <div class="wrap">
     <a class="brand" href="#top">Sealtiey Menegassi</a>
     <ul>
+      <li><a href="#gestorjit">GestorJIT</a></li>
       <li><a href="#huntd">Huntd</a></li>
       <li><a href="#amostras">Casos e bugs</a></li>
       <li><a href="#api">API</a></li>
@@ -240,7 +241,7 @@ main{position:relative}
       <p class="role">Analista de QA Júnior · Testes Manuais Web e Mobile, API e SQL</p>
       <p class="lead">QA com formação prática pela Mate Academy: escrevo planos e casos de teste, executo testes em web, mobile e API e documento bugs com clareza. Antes, atuei 5 anos como Tech Recruiter contratando times de tecnologia, inclusive QAs, e conheço por dentro o que um time de produto espera de quem testa.</p>
       <div class="btns">
-        <a class="btn primary" href="#huntd">Ver meu trabalho</a>
+        <a class="btn primary" href="#gestorjit">Ver meu trabalho</a>
         <a class="btn" href="assets/CV_Sealtiey_Menegassi_QA.pdf" download aria-label="Baixar currículo em PDF">Currículo (PDF)</a>
         <a class="btn" href="https://www.linkedin.com/in/sealtieymenegassi/" target="_blank" rel="noopener">LinkedIn</a>
         <a class="btn" href="https://github.com/Sealtiey" target="_blank" rel="noopener">GitHub</a>
@@ -249,6 +250,43 @@ main{position:relative}
       <img class="avatar" src="assets/foto-sealtiey.jpg" alt="Foto de Sealtiey Menegassi" width="220" height="220">
     </div>
   </div>
+
+  <section id="gestorjit">
+    <div class="wrap">
+      <span class="kind-label">Produto real · Em andamento</span>
+      <h2>GestorJIT: QA em um sistema de gestão de academias</h2>
+      <p class="sub">Desde novembro de 2026 testo o <a href="https://gestorjit.com.br" target="_blank" rel="noopener">GestorJIT</a>, um sistema web em produção para academias, com áreas de academia, professor e aluno. Trabalho em uma equipe de 3 QAs: desenhei a suíte de testes no TestRail, executo os testes e reporto os bugs no Jira para o time de desenvolvimento.</p>
+
+      <div class="stats">
+        <div class="stat"><strong>185</strong><span>casos de teste no TestRail, em 7 áreas</span></div>
+        <div class="stat"><strong>4</strong><span>perfis testados: academia, professor, aluno e admin</span></div>
+        <div class="stat"><strong>4</strong><span>bugs que reportei no Jira</span></div>
+        <div class="stat"><strong>4 de 4</strong><span>bugs corrigidos pelo time</span></div>
+      </div>
+
+      <div class="grid pair" style="margin-top:20px">
+        <div class="card">
+          <h3>Bugs que encontrei</h3>
+          <ul class="checks">
+            <li><span class="mono">CP-1</span> · <strong>Cadastro (prioridade mais alta):</strong> o link de confirmação de e-mail apontava para <code>localhost</code>, e a conta nova não era ativada</li>
+            <li><span class="mono">CP-8</span> · <strong>Segurança:</strong> o login não bloqueava a conta após tentativas repetidas de senha incorreta. No report, analisei o risco para dados de alunos, inclusive menores de idade, e dados financeiros</li>
+            <li><span class="mono">CP-2</span> · <strong>Validação:</strong> o campo de telefone aceitava números inválidos</li>
+            <li><span class="mono">CP-10</span> · <strong>Usabilidade:</strong> a academia não via nenhum indicador de notificação pendente quando um aluno informava um pagamento</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Como a suíte foi organizada</h3>
+          <ul class="checks">
+            <li><strong>Áreas:</strong> autenticação e cadastro, área da academia, área do professor, área do aluno, segurança e permissões, fluxos ponta a ponta, usabilidade e responsividade</li>
+            <li><strong>Segurança:</strong> acesso por perfil via URL direta, isolamento de dados entre academias, sessão e entrada de dados maliciosa</li>
+            <li><strong>Ponta a ponta:</strong> do cadastro do aluno ao acesso liberado e o ciclo completo da mensalidade, da cobrança ao pagamento</li>
+            <li><strong>Com apoio de IA:</strong> usei IA para estruturar os casos, revisei cada um e importei a suíte no TestRail via CSV</li>
+          </ul>
+          <div class="chips" style="margin-top:14px"><span class="chip">TestRail</span><span class="chip">Jira</span><span class="chip">Testes de segurança</span><span class="chip">Permissões</span><span class="chip">Ponta a ponta</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <section id="huntd">
     <div class="wrap">
