@@ -191,6 +191,7 @@ details.shot[open] summary::before{transform:rotate(90deg)}
 details.shot figure{margin:10px 0 0}
 details.shot img{max-width:720px}
 details.more-certs{margin-top:12px}
+.hi-bugs li::before{content:"!";color:var(--fail)}
 details.more-certs .certs{margin-top:10px}
 
 @media (min-width:960px){.samples{grid-template-columns:1fr 1fr;align-items:start}.samples>.card{grid-column:1/-1}}
@@ -263,6 +264,15 @@ main{position:relative}
         <div class="stat"><strong>95%</strong><span>aprovação na web (123 de 129)</span></div>
         <div class="stat"><strong>100%</strong><span>aprovação no app (26 de 26)</span></div>
         <div class="stat"><strong>8</strong><span>bugs no Jira (3 de prioridade alta, 5 média)</span></div>
+      </div>
+
+      <div class="card" style="margin-top:16px">
+        <h3>Bugs de prioridade alta encontrados</h3>
+        <ul class="checks hi-bugs">
+          <li><span class="mono">KAN-34</span> · <strong>Perfil do candidato:</strong> o campo Core Technical Skills mostra "Max number of core skills is selected" sem nenhuma skill selecionada</li>
+          <li><span class="mono">KAN-37</span> · <strong>Conexões:</strong> o CV e os contatos do candidato continuam ocultos mesmo depois que o recrutador envia mensagem e a conexão é estabelecida</li>
+          <li><span class="mono">KAN-38</span> · <strong>For Engineers:</strong> o link de download na Google Play redireciona para uma URL inválida</li>
+        </ul>
       </div>
 
       <div class="grid pair" style="margin-top:20px">
