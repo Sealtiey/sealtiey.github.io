@@ -197,6 +197,8 @@ details.shot[open] summary::before{transform:rotate(90deg)}
 details.shot figure{margin:10px 0 0}
 details.shot img{max-width:720px}
 details.more-certs{margin-top:12px}
+details.more-details{margin-top:18px;border-top:1px solid var(--border);padding-top:6px}
+details.more-details>summary{font-size:.95rem}
 .hi-bugs li::before{content:"!";color:var(--fail)}
 details.more-certs .certs{margin-top:10px}
 
@@ -320,6 +322,8 @@ main{position:relative}
         </ul>
       </div>
 
+      <details class="shot more-details">
+        <summary>Ver detalhes do teste: resultado por módulo, matriz de permissões e RTM</summary>
       <div class="grid pair" style="margin-top:20px">
         <div class="card">
           <h3>Resultado por módulo</h3>
@@ -359,6 +363,8 @@ main{position:relative}
         <p style="margin:12px 0 0;font-size:.88rem">Total: 129 casos em 11 módulos na web e 26 casos em 5 módulos no app.</p>
       </div>
 
+      </details>
+
       <div class="downloads">
         <span>Documentos do projeto:</span>
         <a class="btn" href="assets/huntd/huntd-test-plan.docx" download>Plano de teste</a>
@@ -373,7 +379,7 @@ main{position:relative}
   <section id="amostras">
     <div class="wrap">
       <h2>Casos de teste e bugs</h2>
-      <p class="sub">Como escrevo casos de teste e documento os bugs que encontro, com exemplos de web, API e mobile, mais um exemplo de SQL.</p>
+      <p class="sub">Como escrevo casos de teste e documento os bugs que encontro, com exemplos de web e API, mais um exemplo de SQL.</p>
 
       <div class="grid samples" style="gap:20px">
 
@@ -391,14 +397,6 @@ main{position:relative}
               </dl>
             </div>
             <div class="tc">
-              <div class="tc-head"><span class="id">PS-TC-002</span><span class="badge neg">Negativo</span><span class="badge pri">Prioridade: alta</span></div>
-              <p class="tc-title">O campo User ID não deve aceitar caracteres especiais</p>
-              <dl>
-                <dt>Passos</dt><dd><ol><li>Abrir o formulário de cadastro</li><li>Digitar um User ID com caractere especial</li><li>Preencher os demais campos com dados válidos</li><li>Clicar em "Save Account Information"</li></ol></dd>
-                <dt>Esperado</dt><dd class="res-ok">Mensagem de erro informando que o User ID aceita só letras e números</dd>
-              </dl>
-            </div>
-            <div class="tc">
               <div class="tc-head"><span class="id">PS-TC-003</span><span class="badge pos">Positivo</span><span class="badge crit">Prioridade: crítica</span></div>
               <p class="tc-title">O campo User ID deve aceitar letras e números</p>
               <dl>
@@ -408,48 +406,7 @@ main{position:relative}
             </div>
           </div>
         </div>
-        <div class="ticket">
-          <header>
-            <span class="id">PS-002</span>
-            <span class="badge sev">Severidade: moderada</span>
-            <span class="badge pri">Prioridade: média</span>
-            <span class="chip">JPetStore · Cadastro</span>
-          </header>
-          <div class="body">
-            <p class="sum">E-mail em formato inválido (ex.: <code>@@@</code>) não mostra mensagem de erro; a página apenas recarrega.</p>
-            <dl>
-              <dt>Passos</dt>
-              <dd><ol><li>Abrir o site</li><li>Clicar em Sign In</li><li>Clicar em Register Now</li><li>Preencher o campo de e-mail com <code>@@@</code> e enviar</li></ol></dd>
-              <dt>Resultado atual</dt><dd class="res-bad">A página recarrega, sem nenhuma mensagem de validação.</dd>
-              <dt>Resultado esperado</dt><dd class="res-ok">Uma mensagem de erro informando que o e-mail é inválido.</dd>
-              <dt>Ambiente</dt><dd>macOS 14 Sonoma · Chrome (última versão)</dd>
-            </dl>
-          </div>
-        </div>
 
-                <div class="ticket">
-            <header>
-              <span class="id">KAN-23</span>
-              <span class="badge pri">Prioridade: média</span>
-              <span class="chip">Mobile · Android</span>
-            </header>
-            <div class="body">
-              <p class="sum">O botão Salvar não aplica o tema escuro selecionado.</p>
-              <dl>
-                <dt>Ambiente</dt>
-                <dd>App ToDo 1.0.0 · Emulador Pixel 7 · Android 17 · Android Studio Quail 3 · macOS 26.6</dd>
-                <dt>Passos</dt>
-                <dd><ol><li>Abrir o app ToDo</li><li>Ir em Settings</li><li>Selecionar Dark Theme</li><li>Tocar em Save</li></ol></dd>
-                <dt>Resultado atual</dt><dd class="res-bad">Nada acontece ao tocar em Save, e o app continua no tema anterior.</dd>
-                <dt>Resultado esperado</dt><dd class="res-ok">O tema escuro é salvo e aplicado.</dd>
-                <dt>Evidência</dt><dd>Gravação de tela no Loom, anexada ao ticket.</dd>
-              </dl>
-              <details class="shot">
-                <summary>Ver print no Jira</summary>
-                <figure><img src="assets/jira-mobile-bug.jpg" alt="Issue KAN-23 no Jira: ambiente, passos, resultado atual e esperado e link para o vídeo no Loom" loading="lazy"><figcaption>O bug no Jira, com o ambiente completo e o vídeo da reprodução.</figcaption></figure>
-              </details>
-            </div>
-        </div>
 
                 <div class="ticket">
             <header>
@@ -513,13 +470,72 @@ main{position:relative}
           </details>
         </div>
       </div>
+      <details class="shot more-details">
+        <summary>Ver mais exemplos: 1 caso de teste e 2 bugs</summary>
+        <div class="grid samples" style="gap:20px;margin-top:12px">
+        <div class="card">
+          <h3>Mais um caso de teste do JPetStore</h3>
+          <div class="tc-list">
+            <div class="tc">
+              <div class="tc-head"><span class="id">PS-TC-002</span><span class="badge neg">Negativo</span><span class="badge pri">Prioridade: alta</span></div>
+              <p class="tc-title">O campo User ID não deve aceitar caracteres especiais</p>
+              <dl>
+                <dt>Passos</dt><dd><ol><li>Abrir o formulário de cadastro</li><li>Digitar um User ID com caractere especial</li><li>Preencher os demais campos com dados válidos</li><li>Clicar em "Save Account Information"</li></ol></dd>
+                <dt>Esperado</dt><dd class="res-ok">Mensagem de erro informando que o User ID aceita só letras e números</dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+        <div class="ticket">
+          <header>
+            <span class="id">PS-002</span>
+            <span class="badge sev">Severidade: moderada</span>
+            <span class="badge pri">Prioridade: média</span>
+            <span class="chip">JPetStore · Cadastro</span>
+          </header>
+          <div class="body">
+            <p class="sum">E-mail em formato inválido (ex.: <code>@@@</code>) não mostra mensagem de erro; a página apenas recarrega.</p>
+            <dl>
+              <dt>Passos</dt>
+              <dd><ol><li>Abrir o site</li><li>Clicar em Sign In</li><li>Clicar em Register Now</li><li>Preencher o campo de e-mail com <code>@@@</code> e enviar</li></ol></dd>
+              <dt>Resultado atual</dt><dd class="res-bad">A página recarrega, sem nenhuma mensagem de validação.</dd>
+              <dt>Resultado esperado</dt><dd class="res-ok">Uma mensagem de erro informando que o e-mail é inválido.</dd>
+              <dt>Ambiente</dt><dd>macOS 14 Sonoma · Chrome (última versão)</dd>
+            </dl>
+          </div>
+        </div>
+                <div class="ticket">
+            <header>
+              <span class="id">KAN-23</span>
+              <span class="badge pri">Prioridade: média</span>
+              <span class="chip">Mobile · Android</span>
+            </header>
+            <div class="body">
+              <p class="sum">O botão Salvar não aplica o tema escuro selecionado.</p>
+              <dl>
+                <dt>Ambiente</dt>
+                <dd>App ToDo 1.0.0 · Emulador Pixel 7 · Android 17 · Android Studio Quail 3 · macOS 26.6</dd>
+                <dt>Passos</dt>
+                <dd><ol><li>Abrir o app ToDo</li><li>Ir em Settings</li><li>Selecionar Dark Theme</li><li>Tocar em Save</li></ol></dd>
+                <dt>Resultado atual</dt><dd class="res-bad">Nada acontece ao tocar em Save, e o app continua no tema anterior.</dd>
+                <dt>Resultado esperado</dt><dd class="res-ok">O tema escuro é salvo e aplicado.</dd>
+                <dt>Evidência</dt><dd>Gravação de tela no Loom, anexada ao ticket.</dd>
+              </dl>
+              <details class="shot">
+                <summary>Ver print no Jira</summary>
+                <figure><img src="assets/jira-mobile-bug.jpg" alt="Issue KAN-23 no Jira: ambiente, passos, resultado atual e esperado e link para o vídeo no Loom" loading="lazy"><figcaption>O bug no Jira, com o ambiente completo e o vídeo da reprodução.</figcaption></figure>
+              </details>
+            </div>
+        </div>
+        </div>
+      </details>
     </div>
   </section>
 
   <section id="api">
     <div class="wrap">
       <h2>Destaque: testes de API do Conduit no Postman</h2>
-      <p class="sub">Uma coleção completa que cobre a API inteira do Conduit, com cenários positivos e negativos e verificações automáticas em cada requisição.</p>
+      <p class="sub">Uma coleção completa que cobre a API inteira do Conduit, com cenários positivos e negativos e verificações automáticas em cada requisição. No mesmo projeto também fiz o plano de teste, os casos de teste e a regressão no TestRail integrado ao Jira, analisei requisições no DevTools e rodei a aplicação localmente com Docker para consultar o banco com SQL.</p>
 
       <div class="stats">
         <div class="stat"><strong>44</strong><span>requisições</span></div>
@@ -569,19 +585,6 @@ pm.<span class="kw">test</span>("Assert response body is Forbidden", () => {
       <div class="grid g2">
 
         <article class="card proj">
-          <div class="kind">Web · Ciclo completo</div>
-          <h3>Conduit</h3>
-          <p>Rede de artigos estilo Medium, com cadastro, login, publicação, comentários e seguidores.</p>
-          <ul>
-            <li>Plano de teste com escopo, riscos, critérios de suspensão e de saída</li>
-            <li>Decomposição da Home e casos de teste de Sign In, Sign Up, Artigos e Settings</li>
-            <li>Execução de test runs e regressão no TestRail, integrado ao Jira</li>
-            <li>Testes de API no Postman e consultas SQL no banco da aplicação</li>
-          </ul>
-          <div class="chips"><span class="chip">TestRail</span><span class="chip">Jira</span><span class="chip">Postman</span><span class="chip">SQL</span></div>
-        </article>
-
-        <article class="card proj">
           <div class="kind">Web · E-commerce</div>
           <h3>JPetStore</h3>
           <p>Loja virtual de pets: navegação, cadastro, autenticação, carrinho e finalização de pedido.</p>
@@ -591,19 +594,6 @@ pm.<span class="kw">test</span>("Assert response body is Forbidden", () => {
             <li>Bug reports das páginas de Cadastro, Sign In e Ajuda, com bug summary</li>
           </ul>
           <div class="chips"><span class="chip">Casos de teste</span><span class="chip">Bug reports</span><span class="chip">STLC</span></div>
-        </article>
-
-
-        <article class="card proj">
-          <div class="kind">API · Web</div>
-          <h3>API, DevTools e infraestrutura</h3>
-          <p>Como a web funciona por baixo, e como testar o que o usuário não vê.</p>
-          <ul>
-            <li>Coleções no Postman com variáveis e massa de dados via CSV</li>
-            <li>Análise de requisições com DevTools (Network, Console, Application)</li>
-            <li>Ambientes locais com Docker e consultas SQL com JOIN</li>
-          </ul>
-          <div class="chips"><span class="chip">Postman</span><span class="chip">DevTools</span><span class="chip">Docker</span><span class="chip">SQL</span></div>
         </article>
 
         <article class="card proj">
