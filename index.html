@@ -9,7 +9,7 @@
 <meta property="og:title" content="Sealtiey Menegassi · Analista de QA Júnior">
 <meta property="og:description" content="Portfólio de QA: testes em um sistema real (GestorJit, 185 casos), estudo de caso do Huntd (155 casos), testes de API no Postman (157 verificações), bugs e SQL.">
 <meta property="og:url" content="https://sealtiey.github.io/">
-<meta property="og:image" content="https://sealtiey.github.io/assets/og-cover-v3.png">
+<meta property="og:image" content="https://sealtiey.github.io/assets/og-cover-v4.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="627">
 <meta property="og:image:alt" content="Portfólio de QA de Sealtiey Menegassi: 185 casos de teste no GestorJit, 155 no Huntd e 157 verificações de API">
@@ -32,17 +32,19 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
   color-scheme:dark;
-  --bg:#0b1220; --surface:#111b2b; --surface-2:#16233a; --text:#eef2f6; --muted:#a3b2c4;
-  --border:#22324b; --accent:#3cc4ae; --accent-soft:#113a3b; --pass:#4ccf86; --fail:#ff7a70; --warn:#f0b54d;
-  --shadow:none; --c-pass:#26ab95; --c-fail:#e8574d;
+  --bg:#09090D; --surface:#111018; --surface-2:#17151F; --text:#F5F3FA; --muted:#C9C4D4; --faint:#9993A6;
+  --border:rgba(196,167,255,.10); --border-strong:rgba(196,167,255,.22);
+  --accent:#C4A7FF; --accent-strong:#8B5CF6; --accent-neon:#A855F7; --accent-soft:#201333;
+  --pass:#4ADE80; --fail:#F87171; --warn:#F0B54D;
+  --shadow:none; --c-pass:#8B5CF6; --c-fail:#F87171;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:radial-gradient(ellipse 900px 520px at 12% 0%,#12304a 0%,rgba(18,48,74,0) 70%) no-repeat,var(--bg);color:var(--text);font:16px/1.6 Inter,system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+body{margin:0;background:radial-gradient(ellipse 900px 520px at 12% 0%,#201333 0%,rgba(32,19,51,0) 70%) no-repeat,var(--bg);color:var(--text);font:16px/1.6 Inter,system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
 a{color:var(--accent)}
 .wrap{max-width:1040px;margin:0 auto;padding:0 16px}
 code,.mono{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:.88em}
@@ -67,7 +69,11 @@ h1{font-size:clamp(2.1rem,5vw,3.3rem);line-height:1.1;margin:18px 0 12px;letter-
 .hero p.lead{font-size:1.08rem;max-width:660px;margin:0 0 28px}
 .btns{display:flex;flex-wrap:wrap;gap:12px}
 .btn{display:inline-block;padding:11px 18px;border-radius:10px;font-weight:600;text-decoration:none;border:1px solid var(--border);color:var(--text);background:var(--surface)}
-.btn.primary{background:var(--accent);border-color:var(--accent);color:#0b1220}
+.btn.primary{background:linear-gradient(135deg,#9D6BFF 0%,#7C3AED 100%);border-color:transparent;color:#fff}
+.btn:hover{border-color:var(--border-strong)}
+h1,h2,h3,nav .brand,.stat strong{font-family:Sora,Inter,system-ui,sans-serif}
+.hero h1{background:linear-gradient(100deg,#F5F3FA 10%,#C4A7FF 55%,#A855F7 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+::selection{background:#8B5CF6;color:#fff}
 
 /* sections */
 section{padding:56px 0;border-top:1px solid var(--border)}
@@ -173,7 +179,7 @@ footer{padding:28px 0 40px;color:var(--muted);font-size:.85rem;text-align:center
 
 .nav-cv{color:var(--accent)!important;font-weight:600}
 .certs li a{display:flex;justify-content:space-between;gap:12px;width:100%;color:var(--text);text-decoration:none}
-.certs li:has(a):hover{border-color:var(--accent)}
+.certs li:has(a):hover{border-color:var(--border-strong)}
 .certs li a:hover .cert-org{color:var(--accent)}
 .cert-org{color:var(--muted);white-space:nowrap}
 .tc-list{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
@@ -205,7 +211,7 @@ details.more-certs .certs{margin-top:10px}
 @media (min-width:960px){.samples{grid-template-columns:1fr 1fr;align-items:start}.samples>.card{grid-column:1/-1}}
 
 .hero-grid{display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center}
-.avatar{width:220px;height:220px;border-radius:50%;object-fit:cover;border:4px solid var(--surface);box-shadow:0 0 0 2px var(--accent),var(--shadow)}
+.avatar{width:220px;height:220px;border-radius:50%;object-fit:cover;border:4px solid var(--surface);box-shadow:0 0 0 2px var(--accent-strong),var(--shadow)}
 @media (max-width:720px){.hero-grid{grid-template-columns:1fr;gap:20px}.avatar{order:-1;width:120px;height:120px}}
 
 main{position:relative}
@@ -770,12 +776,12 @@ pm.<span class="kw">test</span>("Assert response body is Forbidden", () => {
     var a=pts[i], b=pts[j], d=Math.hypot(a[0]-b[0],a[1]-b[1]);
     if(d<150){ var l=document.createElementNS(NS,'line');
       l.setAttribute('x1',a[0]);l.setAttribute('y1',a[1]);l.setAttribute('x2',b[0]);l.setAttribute('y2',b[1]);
-      l.setAttribute('stroke','rgba(60,196,174,'+((0.05+0.16*(1-d/150))*Math.min(fade(a),fade(b))).toFixed(3)+')');
+      l.setAttribute('stroke','rgba(139,92,246,'+((0.05+0.16*(1-d/150))*Math.min(fade(a),fade(b))).toFixed(3)+')');
       svg.appendChild(l); } }
   pts.forEach(function(p){ var f=fade(p), r=1.4+p[2]*2.4, c;
-    if(p[2]>0.85){ c=document.createElementNS(NS,'circle'); c.setAttribute('cx',p[0]);c.setAttribute('cy',p[1]);c.setAttribute('r',r*4);c.setAttribute('fill','rgba(60,196,174,'+(0.10*f).toFixed(3)+')'); svg.appendChild(c); }
+    if(p[2]>0.85){ c=document.createElementNS(NS,'circle'); c.setAttribute('cx',p[0]);c.setAttribute('cy',p[1]);c.setAttribute('r',r*4);c.setAttribute('fill','rgba(139,92,246,'+(0.10*f).toFixed(3)+')'); svg.appendChild(c); }
     c=document.createElementNS(NS,'circle'); c.setAttribute('cx',p[0]);c.setAttribute('cy',p[1]);c.setAttribute('r',r);
-    c.setAttribute('fill', p[2]>0.85?'rgba(140,240,222,'+(0.8*f).toFixed(3)+')':'rgba(60,196,174,'+(0.45*f).toFixed(3)+')'); svg.appendChild(c); });
+    c.setAttribute('fill', p[2]>0.85?'rgba(196,167,255,'+(0.8*f).toFixed(3)+')':'rgba(139,92,246,'+(0.45*f).toFixed(3)+')'); svg.appendChild(c); });
 })();
 </script>
 </body>
