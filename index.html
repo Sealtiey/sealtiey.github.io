@@ -9,7 +9,7 @@
 <meta property="og:title" content="Sealtiey Menegassi · Analista de QA Júnior">
 <meta property="og:description" content="Portfólio de QA: testes em um sistema real (GestorJit, 185 casos), estudo de caso do Huntd (155 casos), testes de API no Postman (157 verificações), bugs e SQL.">
 <meta property="og:url" content="https://sealtiey.github.io/">
-<meta property="og:image" content="https://sealtiey.github.io/assets/og-cover-v4.png">
+<meta property="og:image" content="https://sealtiey.github.io/assets/og-cover-v5.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="627">
 <meta property="og:image:alt" content="Portfólio de QA de Sealtiey Menegassi: 185 casos de teste no GestorJit, 155 no Huntd e 157 verificações de API">
@@ -770,18 +770,18 @@ pm.<span class="kw">test</span>("Assert response body is Forbidden", () => {
   svg.setAttribute('viewBox','0 0 '+W+' '+H);
   function rnd(){ seed=(seed*16807)%2147483647; return seed/2147483647; }
   var pts=[], i, j;
-  for(i=0;i<70;i++){ var x=rnd()*W, y=rnd()*H; pts.push([x,y,rnd()]); }
+  for(i=0;i<95;i++){ var x=rnd()*W, y=rnd()*H; pts.push([x,y,rnd()]); }
   function fade(p){ var cx=Math.abs(p[0]-W*0.42)/(W*0.42); return Math.min(1,0.25+cx*0.9)*(1-p[1]/H*0.8); }
   for(i=0;i<pts.length;i++) for(j=i+1;j<pts.length;j++){
     var a=pts[i], b=pts[j], d=Math.hypot(a[0]-b[0],a[1]-b[1]);
-    if(d<150){ var l=document.createElementNS(NS,'line');
+    if(d<170){ var l=document.createElementNS(NS,'line');
       l.setAttribute('x1',a[0]);l.setAttribute('y1',a[1]);l.setAttribute('x2',b[0]);l.setAttribute('y2',b[1]);
-      l.setAttribute('stroke','rgba(139,92,246,'+((0.05+0.16*(1-d/150))*Math.min(fade(a),fade(b))).toFixed(3)+')');
+      l.setAttribute('stroke','rgba(196,167,255,'+((0.10+0.32*(1-d/170))*Math.min(fade(a),fade(b))).toFixed(3)+')'); l.setAttribute('stroke-width','1.1');
       svg.appendChild(l); } }
   pts.forEach(function(p){ var f=fade(p), r=1.4+p[2]*2.4, c;
-    if(p[2]>0.85){ c=document.createElementNS(NS,'circle'); c.setAttribute('cx',p[0]);c.setAttribute('cy',p[1]);c.setAttribute('r',r*4);c.setAttribute('fill','rgba(139,92,246,'+(0.10*f).toFixed(3)+')'); svg.appendChild(c); }
+    if(p[2]>0.85){ c=document.createElementNS(NS,'circle'); c.setAttribute('cx',p[0]);c.setAttribute('cy',p[1]);c.setAttribute('r',r*4);c.setAttribute('fill','rgba(168,85,247,'+(0.18*f).toFixed(3)+')'); svg.appendChild(c); }
     c=document.createElementNS(NS,'circle'); c.setAttribute('cx',p[0]);c.setAttribute('cy',p[1]);c.setAttribute('r',r);
-    c.setAttribute('fill', p[2]>0.85?'rgba(196,167,255,'+(0.8*f).toFixed(3)+')':'rgba(139,92,246,'+(0.45*f).toFixed(3)+')'); svg.appendChild(c); });
+    c.setAttribute('fill', p[2]>0.85?'rgba(216,196,255,'+(0.95*f).toFixed(3)+')':'rgba(168,85,247,'+(0.75*f).toFixed(3)+')'); svg.appendChild(c); });
 })();
 </script>
 </body>
