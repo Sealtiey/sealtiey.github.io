@@ -101,7 +101,7 @@ h2{font-size:1.65rem;margin:0 0 8px;letter-spacing:-.01em}
 .legend{display:flex;gap:16px;font-size:.84rem;color:var(--muted);margin:4px 0 14px}
 .legend span{display:inline-flex;align-items:center;gap:6px}
 .sw{width:10px;height:10px;border-radius:3px;display:inline-block}
-.sw-pass,.seg.pass{background:var(--c-pass)} .sw-fail,.seg.fail{background:var(--c-fail)}
+.sw-pass,.seg.pass{background:var(--c-pass)} .sw-fail,.seg.fail{background:var(--c-fail)} .sw-other,.seg.other{background:var(--c-other,var(--muted))}
 .chart{display:grid;gap:7px}
 .row{display:grid;grid-template-columns:minmax(110px,36%) 1fr 84px;align-items:center;gap:10px;font-size:.84rem;position:relative}
 .row .lbl{color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -261,35 +261,47 @@ main{position:relative}
 
   <section id="gestorjit">
     <div class="wrap">
-      <span class="kind-label">Produto real · Testes em andamento (atualizado em 18/11/2026)</span>
+      <span class="kind-label">Produto real · 1ª rodada de testes concluída (24/11/2026)</span>
       <h2>GestorJit: QA em um sistema de gestão de academias</h2>
-      <p class="sub">Desde novembro de 2026 testo o <a href="https://gestorjit.com.br" target="_blank" rel="noopener">GestorJit</a>, um sistema web em produção para academias, com áreas de academia, professor e aluno. Trabalho em uma equipe de 3 QAs: desenhei a suíte de testes no TestRail, executo os testes e reporto os bugs no Jira para o time de desenvolvimento.</p>
+      <p class="sub">Testo o <a href="https://gestorjit.com.br" target="_blank" rel="noopener">GestorJit</a>, um sistema web em produção para academias, com áreas de academia, professor e aluno. Trabalhamos em uma equipe de 3 QAs, e os números abaixo mostram só a minha parte da primeira rodada: os testes que eu executei no TestRail e o que eu reportei no Jira.</p>
 
       <div class="stats">
-        <div class="stat"><strong>185</strong><span>casos de teste no TestRail, em 7 áreas</span></div>
-        <div class="stat"><strong>4</strong><span>perfis testados: academia, professor, aluno e admin</span></div>
-        <div class="stat"><strong>4</strong><span>bugs que reportei no Jira</span></div>
-        <div class="stat"><strong>4 de 4</strong><span>bugs corrigidos pelo time</span></div>
+        <div class="stat"><strong>137</strong><span>testes executados por mim, de 188 na rodada</span></div>
+        <div class="stat"><strong>20</strong><span>bugs que encontrei e reportei no Jira</span></div>
+        <div class="stat"><strong>6</strong><span>melhorias que sugeri ao time</span></div>
+        <div class="stat"><strong>6</strong><span>bugs de prioridade alta ou mais alta</span></div>
       </div>
-      <p class="sub" style="margin:16px 0 0">A execução da suíte continua. Nos testes executados até agora, encontrei, documentei e reportei as 4 falhas abaixo, e o time corrigiu todas.</p>
+      <p class="sub" style="margin:16px 0 0">Das 32 issues abertas no projeto pela equipe, 26 vieram dos meus testes. Além de executar a suíte, fiz testes exploratórios. Sempre que encontrava um bug sem caso de teste correspondente, eu criava o caso, incluía na execução e vinculava o bug a ele, para manter a rastreabilidade entre TestRail e Jira. Os 5 primeiros bugs que reportei já foram corrigidos pelo time de desenvolvimento, e os demais seguem para correção.</p>
 
       <div class="grid pair" style="margin-top:20px">
         <div class="card">
-          <h3>Falhas que encontrei e reportei</h3>
+          <h3>Bugs de prioridade alta que encontrei</h3>
+          <ul class="checks hi-bugs">
+            <li><span class="mono">CP-1</span> · <strong>Cadastro (prioridade mais alta, corrigido):</strong> o link de confirmação de e-mail apontava para <code>localhost</code>, e a conta nova não era ativada</li>
+            <li><span class="mono">CP-2</span> · <strong>Validação (corrigido):</strong> o campo de telefone aceitava números inválidos, como <code>0000</code></li>
+            <li><span class="mono">CP-25</span> · <strong>Permissões:</strong> um professor conseguia abrir as aulas de outros professores e alterar tanto o professor responsável quanto a chamada dos alunos</li>
+            <li><span class="mono">CP-22</span> · <strong>Cadastro:</strong> o sistema aceitava e-mails em formato inválido no cadastro de usuário</li>
+            <li><span class="mono">CP-15</span> · <strong>Graduação:</strong> o professor não conseguia agendar uma graduação com data futura, que é justamente uma das finalidades da funcionalidade</li>
+            <li><span class="mono">CP-29</span> · <strong>Financeiro:</strong> ao gerar mensalidades, o aviso de que nada foi gerado aparecia em verde, a cor de sucesso, induzindo a academia ao erro</li>
+          </ul>
+          <h3 style="margin-top:22px">Outros destaques</h3>
           <ul class="checks">
-            <li><span class="mono">CP-8</span> · <strong>Segurança:</strong> o login não bloqueava a conta após tentativas repetidas de senha incorreta. Sem esse bloqueio, um robô que trocasse de IP poderia continuar testando senhas até acertar e chegar a dados sensíveis de alunos, inclusive menores de idade, e às informações financeiras da academia</li>
-            <li><span class="mono">CP-1</span> · <strong>Cadastro (prioridade mais alta):</strong> o link de confirmação de e-mail apontava para <code>localhost</code>, e a conta nova não era ativada</li>
-            <li><span class="mono">CP-2</span> · <strong>Validação:</strong> o campo de telefone aceitava números inválidos</li>
-            <li><span class="mono">CP-10</span> · <strong>Usabilidade:</strong> a academia não via nenhum indicador de notificação pendente quando um aluno informava um pagamento</li>
+            <li><span class="mono">CP-8</span> · <strong>Segurança (corrigido):</strong> o login não bloqueava a conta após tentativas repetidas de senha incorreta. Sem esse bloqueio, um robô poderia testar senhas até acertar e chegar a dados de alunos, inclusive menores de idade, e às informações financeiras da academia</li>
+            <li><span class="mono">CP-26</span> · <strong>Validação:</strong> era possível cadastrar professores com e-mails duplicados</li>
+            <li><span class="mono">CP-31</span> · <strong>Pagamentos:</strong> o Pix podia ser ativado com uma chave inválida ou inexistente</li>
           </ul>
         </div>
         <div class="card">
-          <h3>Como a suíte foi organizada</h3>
+          <h3>Resultado dos meus testes por área</h3>
+          <div class="legend"><span><i class="sw sw-pass"></i>Passou</span><span><i class="sw sw-fail"></i>Falhou</span><span><i class="sw sw-other"></i>Bloqueado ou reteste</span></div>
+          <div class="chart" id="chart-gj" aria-label="Resultado dos testes que executei no GestorJit, por área"></div>
+
+          <h3 style="margin-top:22px">Melhorias que sugeri</h3>
           <ul class="checks">
-            <li><strong>Áreas:</strong> autenticação e cadastro, área da academia, área do professor, área do aluno, segurança e permissões, fluxos ponta a ponta, usabilidade e responsividade</li>
-            <li><strong>Segurança:</strong> acesso por perfil via URL direta, isolamento de dados entre academias, sessão e entrada de dados maliciosa</li>
-            <li><strong>Ponta a ponta:</strong> do cadastro do aluno ao acesso liberado e o ciclo completo da mensalidade, da cobrança ao pagamento</li>
-            <li><strong>Com apoio de IA:</strong> usei IA para estruturar os casos, revisei cada um e importei a suíte no TestRail via CSV</li>
+            <li>Permitir que a academia altere o e-mail cadastrado na conta</li>
+            <li>Cadastrar e vincular um professor como aluno direto no cadastro de professor</li>
+            <li>Uma aba exclusiva para os aniversários dos alunos</li>
+            <li>Mensagens mais claras na recuperação de senha e na validação de senha, que aparecia em inglês</li>
           </ul>
           <div class="chips" style="margin-top:14px"><span class="chip">TestRail</span><span class="chip">Jira</span><span class="chip">Testes de segurança</span><span class="chip">Permissões</span><span class="chip">Ponta a ponta</span></div>
         </div>
@@ -734,19 +746,20 @@ pm.<span class="kw">test</span>("Assert response body is Forbidden", () => {
 (function(){
   var web=[["Main Page",8,1],["For Companies",6,0],["For Engineers",8,1],["Authentication / Registration",7,0],["Candidates",17,0],["Candidate Profile",31,3],["Recruiter Profile",6,0],["Jobs",19,0],["Chats / Messages",15,1],["Bonus",4,0],["Footer",8,0]];
   var mob=[["Login / Authentication",8,0],["My Chats",7,0],["Profile",6,0],["Preferences",4,0],["Sign Out",1,0]];
-  var max=31, tip=document.getElementById('tip');
-  function draw(id,data){
+  var mx=31, tip=document.getElementById('tip');
+  function draw(id,data,max){
+    max=max||mx;
     var el=document.getElementById(id);
     data.forEach(function(d){
-      var total=d[1], fail=d[2], pass=total-fail;
+      var total=d[1], fail=d[2], other=d[3]||0, pass=total-fail-other;
       var row=document.createElement('div'); row.className='row';
       var w=(total/max*100);
       row.innerHTML='<span class="lbl">'+d[0]+'</span>'+
         '<span class="track" style="width:'+w+'%">'+
         '<span class="seg pass" style="flex:'+pass+'"></span>'+
-        (fail?'<span class="seg fail" style="flex:'+fail+'"></span>':'')+'</span>'+
+        (fail?'<span class="seg fail" style="flex:'+fail+'"></span>':'')+(other?'<span class="seg other" style="flex:'+other+'"></span>':'')+'</span>'+
         '<span class="val"><b>'+pass+'</b>/'+total+(fail?' · '+fail+' ✕':'')+'</span>';
-      var msg=d[0]+': '+total+' casos · '+pass+' passaram · '+fail+' falharam';
+      var msg=d[0]+': '+total+' casos · '+pass+' passaram · '+fail+' falharam'+(other?' · '+other+' bloqueados ou em reteste':'');
       row.setAttribute('aria-label',msg);
       row.addEventListener('mousemove',function(e){tip.textContent=msg;tip.style.left=Math.min(e.clientX+12,innerWidth-tip.offsetWidth-8)+'px';tip.style.top=(e.clientY+14)+'px';tip.style.opacity=1;});
       row.addEventListener('mouseleave',function(){tip.style.opacity=0;});
@@ -754,6 +767,8 @@ pm.<span class="kw">test</span>("Assert response body is Forbidden", () => {
     });
   }
   draw('chart-web',web); draw('chart-mobile',mob);
+  var gj=[["Login e cadastro",27,5,4],["Área da academia",73,10,2],["Área do professor",8,2],["Área do aluno",5,0],["Segurança",11,0],["Ponta a ponta",9,0],["Usabilidade",4,0]];
+  draw('chart-gj',gj,73);
   var perm=[["Main Page",1,1,1],["For Companies",1,1,1],["For Engineers",1,1,1],["Autenticação / Cadastro",1,1,1],["Candidates",0,1,1],["Candidate Profile",0,1,1],["Recruiter Profile",0,0,1],["Jobs",0,1,1],["Chats / Messages",0,1,1],["Bonus",0,0,1],["Footer",1,1,1]];
   var b=document.getElementById('perm-body');
   perm.forEach(function(p){
