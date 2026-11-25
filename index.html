@@ -93,6 +93,11 @@ h2{font-size:1.65rem;margin:0 0 8px;letter-spacing:-.01em}
 .checks li{padding-left:26px;position:relative}
 .checks li::before{content:"✓";position:absolute;left:0;top:0;color:var(--pass);font-weight:700}
 .checks strong{color:var(--text)}
+.featured{position:relative;border:1px solid var(--border-strong);border-radius:22px;padding:32px 28px;background:radial-gradient(ellipse 700px 360px at 100% 0%,rgba(139,92,246,.16),rgba(139,92,246,0) 70%),var(--surface)}
+@media (max-width:600px){.featured{padding:22px 16px;border-radius:18px}}
+.featured .card{background:var(--bg)}
+.featured-head{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;margin-bottom:12px}
+.featured-head .when{font-size:.82rem;color:var(--muted)}
 .kind-label{display:inline-block;font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--accent);margin-bottom:8px}
 .flow{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;counter-reset:f}
 .flow li{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:2px;font-size:.88rem;color:var(--muted)}
@@ -229,9 +234,7 @@ main{position:relative}
     <ul>
       <li><a href="#gestorjit">GestorJit</a></li>
       <li><a href="#huntd">Huntd</a></li>
-      <li><a href="#amostras">Casos e bugs</a></li>
-      <li><a href="#api">API</a></li>
-      <li><a href="#projetos">Projetos</a></li>
+      <li><a href="#trabalhos">Outros trabalhos</a></li>
       <li><a href="#sobre">Sobre</a></li>
       <li><a href="#certificados">Certificados</a></li>
       <li><a class="nav-cv" href="assets/CV_Sealtiey_Menegassi_QA.pdf" download aria-label="Baixar currículo em PDF">Currículo (PDF)</a></li>
@@ -261,9 +264,10 @@ main{position:relative}
 
   <section id="gestorjit">
     <div class="wrap">
-      <span class="kind-label">Produto real · 1ª rodada de testes concluída (24/11/2026)</span>
+      <div class="featured">
+      <div class="featured-head"><span class="tag">Experiência real · sistema em produção</span><span class="when">1ª rodada de testes concluída em 24/11/2026</span></div>
       <h2>GestorJit: QA em um sistema de gestão de academias</h2>
-      <p class="sub">Testo o <a href="https://gestorjit.com.br" target="_blank" rel="noopener">GestorJit</a>, um sistema web em produção para academias, com áreas de academia, professor e aluno. Trabalhamos em uma equipe de 3 QAs, e os números abaixo mostram só a minha parte da primeira rodada: os testes que eu executei no TestRail e o que eu reportei no Jira.</p>
+      <p class="sub">Testo o <a href="https://gestorjit.com.br" target="_blank" rel="noopener">GestorJit</a>, sistema web em produção para academias, numa equipe de 3 QAs. Os números abaixo são só a minha parte da primeira rodada.</p>
 
       <div class="stats">
         <div class="stat"><strong>137</strong><span>testes executados por mim, de 188 na rodada</span></div>
@@ -271,40 +275,52 @@ main{position:relative}
         <div class="stat"><strong>6</strong><span>melhorias que sugeri ao time</span></div>
         <div class="stat"><strong>6</strong><span>bugs de prioridade alta ou mais alta</span></div>
       </div>
-      <p class="sub" style="margin:16px 0 0">Além de executar a suíte, fiz testes exploratórios. Sempre que encontrava um bug sem caso de teste correspondente, eu criava o caso, incluía na execução e vinculava o bug a ele, para manter a rastreabilidade entre TestRail e Jira. Os 5 primeiros bugs que reportei já foram corrigidos pelo time de desenvolvimento, e os demais seguem para correção.</p>
+      <p class="sub" style="margin:16px 0 0">Além de executar a suíte, fiz testes exploratórios. Sempre que encontrava um bug sem caso de teste correspondente, eu criava o caso, incluía na execução e vinculava o bug a ele, para manter a rastreabilidade entre TestRail e Jira.</p>
 
       <div class="grid pair" style="margin-top:20px">
-        <div class="card">
-          <h3>Bugs de prioridade alta que encontrei</h3>
-          <ul class="checks hi-bugs">
-            <li><span class="mono">CP-1</span> · <strong>Cadastro (prioridade mais alta, corrigido):</strong> o link de confirmação de e-mail apontava para <code>localhost</code>, e a conta nova não era ativada</li>
-            <li><span class="mono">CP-2</span> · <strong>Validação (corrigido):</strong> o campo de telefone aceitava números inválidos, como <code>0000</code></li>
-            <li><span class="mono">CP-25</span> · <strong>Permissões:</strong> um professor conseguia abrir as aulas de outros professores e alterar tanto o professor responsável quanto a chamada dos alunos</li>
-            <li><span class="mono">CP-22</span> · <strong>Cadastro:</strong> o sistema aceitava e-mails em formato inválido no cadastro de usuário</li>
-            <li><span class="mono">CP-15</span> · <strong>Graduação:</strong> o professor não conseguia agendar uma graduação com data futura, que é justamente uma das finalidades da funcionalidade</li>
-            <li><span class="mono">CP-29</span> · <strong>Financeiro:</strong> ao gerar mensalidades, o aviso de que nada foi gerado aparecia em verde, a cor de sucesso, induzindo a academia ao erro</li>
-          </ul>
-          <h3 style="margin-top:22px">Outros destaques</h3>
-          <ul class="checks">
-            <li><span class="mono">CP-8</span> · <strong>Segurança (corrigido):</strong> o login não bloqueava a conta após tentativas repetidas de senha incorreta. Sem esse bloqueio, um robô poderia testar senhas até acertar e chegar a dados de alunos, inclusive menores de idade, e às informações financeiras da academia</li>
-            <li><span class="mono">CP-26</span> · <strong>Validação:</strong> era possível cadastrar professores com e-mails duplicados</li>
-            <li><span class="mono">CP-31</span> · <strong>Pagamentos:</strong> o Pix podia ser ativado com uma chave inválida ou inexistente</li>
-          </ul>
-        </div>
-        <div class="card">
-          <h3>Resultado dos meus testes por área</h3>
-          <div class="legend"><span><i class="sw sw-pass"></i>Passou</span><span><i class="sw sw-fail"></i>Falhou</span><span><i class="sw sw-other"></i>Bloqueado ou reteste</span></div>
-          <div class="chart" id="chart-gj" aria-label="Resultado dos testes que executei no GestorJit, por área"></div>
+      <div class="card">
+        <h3>Bugs de prioridade alta que encontrei</h3>
+        <ul class="checks hi-bugs">
+          <li><span class="mono">CP-1</span> · <strong>Cadastro (corrigido):</strong> o link de confirmação de e-mail apontava para <code>localhost</code>, e a conta nova não era ativada</li>
+          <li><span class="mono">CP-25</span> · <strong>Permissões:</strong> um professor conseguia alterar as aulas e a chamada de outros professores</li>
+          <li><span class="mono">CP-22</span> · <strong>Cadastro:</strong> o sistema aceitava e-mails em formato inválido</li>
+          <li><span class="mono">CP-15</span> · <strong>Graduação:</strong> não era possível agendar uma graduação com data futura, uma das finalidades da funcionalidade</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Resultado dos meus testes por área</h3>
+        <div class="legend"><span><i class="sw sw-pass"></i>Passou</span><span><i class="sw sw-fail"></i>Falhou</span><span><i class="sw sw-other"></i>Bloqueado ou reteste</span></div>
+        <div class="chart" id="chart-gj" aria-label="Resultado dos testes que executei no GestorJit, por área"></div>
+      </div>
+      </div>
 
-          <h3 style="margin-top:22px">Melhorias que sugeri</h3>
+      <details class="shot more-details">
+        <summary>Ver mais: outros bugs que encontrei e melhorias que sugeri</summary>
+      <div class="grid pair" style="margin-top:20px">
+        <div class="card">
+          <h3>Melhorias que sugeri</h3>
           <ul class="checks">
             <li>Permitir que a academia altere o e-mail cadastrado na conta</li>
             <li>Cadastrar e vincular um professor como aluno direto no cadastro de professor</li>
             <li>Uma aba exclusiva para os aniversários dos alunos</li>
             <li>Mensagens mais claras na recuperação de senha e na validação de senha, que aparecia em inglês</li>
           </ul>
-          <div class="chips" style="margin-top:14px"><span class="chip">TestRail</span><span class="chip">Jira</span><span class="chip">Testes de segurança</span><span class="chip">Permissões</span><span class="chip">Ponta a ponta</span></div>
         </div>
+        <div class="card">
+          <h3>Outros bugs que encontrei</h3>
+          <ul class="checks">
+            <li><span class="mono">CP-2</span> · <strong>Validação (corrigido):</strong> o campo de telefone aceitava números inválidos, como <code>0000</code></li>
+            <li><span class="mono">CP-29</span> · <strong>Financeiro:</strong> o aviso de que nenhuma mensalidade foi gerada aparecia em verde, a cor de sucesso</li>
+            <li><span class="mono">CP-8</span> · <strong>Segurança (corrigido):</strong> o login não bloqueava a conta após tentativas repetidas de senha incorreta, abrindo espaço para ataques de força bruta</li>
+            <li><span class="mono">CP-26</span> · <strong>Validação:</strong> era possível cadastrar professores com e-mails duplicados</li>
+            <li><span class="mono">CP-31</span> · <strong>Pagamentos:</strong> o Pix podia ser ativado com uma chave inválida ou inexistente</li>
+          </ul>
+          <p style="margin:14px 0 0;font-size:.9rem;color:var(--muted)">Os 5 primeiros bugs que reportei já foram corrigidos pelo time de desenvolvimento.</p>
+          <div class="chips" style="margin-top:14px"><span class="chip">TestRail</span><span class="chip">Jira</span><span class="chip">Testes exploratórios</span><span class="chip">Permissões</span><span class="chip">Ponta a ponta</span></div>
+        </div>
+      </div>
+      </details>
+      <div class="btns" style="margin-top:20px"><a class="btn" href="https://gestorjit.com.br" target="_blank" rel="noopener">Visitar o GestorJit ↗</a></div>
       </div>
     </div>
   </section>
@@ -394,12 +410,74 @@ main{position:relative}
     </div>
   </section>
 
-  <section id="amostras">
+  <section id="trabalhos">
     <div class="wrap">
-      <h2>Casos de teste e bugs</h2>
-      <p class="sub">Como escrevo casos de teste e documento os bugs que encontro, com exemplos de web e API, mais um exemplo de SQL.</p>
+      <h2>Outros trabalhos</h2>
+      <p class="sub">Aplicações de treino que testei de ponta a ponta. Todos os artefatos estão no repositório <a href="https://github.com/Sealtiey/qa-manual-portfolio" target="_blank" rel="noopener">qa-manual-portfolio ↗</a>.</p>
+      <div class="grid g2" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr))">
 
-      <div class="grid samples" style="gap:20px">
+        <article class="card proj">
+          <div class="kind">API · Postman</div>
+          <h3>Conduit: API completa no Postman</h3>
+          <p>Coleção com 44 requisições e 157 verificações automáticas, cobrindo os 5 módulos da API com cenários positivos e negativos.</p>
+          <ul>
+            <li>Valor-limite, campos vazios, usuário e e-mail repetidos</li>
+            <li>Permissões: 401 sem login e 403 ao mexer no conteúdo de outra pessoa</li>
+            <li>Variáveis encadeadas, massa de dados em CSV e tempo de resposta abaixo de 1 segundo</li>
+            <li>No mesmo projeto: TestRail integrado ao Jira, DevTools, Docker e SQL no banco</li>
+          </ul>
+          <div class="btns" style="margin:0 0 14px;gap:8px">
+            <a class="btn" style="padding:6px 12px;font-size:.85rem" href="assets/conduit-api-tests.postman_collection.json" download>Baixar a coleção (.json)</a>
+          </div>
+          <div class="chips"><span class="chip">Postman</span><span class="chip">APIs REST</span><span class="chip">SQL</span><span class="chip">Docker</span></div>
+        </article>
+
+        <article class="card proj">
+          <div class="kind">Web · E-commerce</div>
+          <h3>JPetStore</h3>
+          <p>Loja virtual de pets: navegação, cadastro, autenticação, carrinho e finalização de pedido.</p>
+          <ul>
+            <li>Requisitos estendidos e casos de teste a partir deles</li>
+            <li>Execução dos casos e mapeamento do STLC</li>
+            <li>Bug reports das páginas de Cadastro, Sign In e Ajuda, com bug summary</li>
+          </ul>
+          <div class="chips"><span class="chip">Casos de teste</span><span class="chip">Bug reports</span><span class="chip">STLC</span></div>
+        </article>
+
+        <article class="card proj">
+          <div class="kind">Introdução à automação</div>
+          <h3>Primeiros passos com Playwright</h3>
+          <p>Módulo introdutório do curso, para entender como testes automatizados são escritos e organizados e conversar bem com quem automatiza.</p>
+          <ul>
+            <li>Conduit: login, cadastro, cenários negativos, Page Object Model e execução em mais de um navegador</li>
+            <li>Coffee Cart: suíte de 14 testes de carrinho e promoção organizada em Page Object Model</li>
+            <li>Wizard Bank: 5 testes da área do cliente escritos do zero</li>
+          </ul>
+          <div class="btns" style="margin:0 0 14px;gap:8px">
+            <a class="btn" style="padding:6px 12px;font-size:.85rem" href="https://github.com/Sealtiey/playwright-conduit-tests" target="_blank" rel="noopener">Conduit ↗</a>
+            <a class="btn" style="padding:6px 12px;font-size:.85rem" href="https://github.com/Sealtiey/playwright-coffee-cart-tests" target="_blank" rel="noopener">Coffee Cart ↗</a>
+            <a class="btn" style="padding:6px 12px;font-size:.85rem" href="https://github.com/Sealtiey/playwright-wizard-bank-tests" target="_blank" rel="noopener">Wizard Bank ↗</a>
+          </div>
+          <div class="chips"><span class="chip">Playwright</span><span class="chip">JavaScript</span><span class="chip">Em aprendizado</span></div>
+        </article>
+        <article class="card proj">
+          <div class="kind">Mobile</div>
+          <h3>Testes em apps mobile</h3>
+          <p>Apps nativos e web apps testados em emuladores, com foco em navegação, usabilidade e comportamento da interface.</p>
+          <ul>
+            <li>Ambiente com Android Studio e Genymotion</li>
+            <li>Bugs registrados no Jira com gravação de tela, dispositivo, SO e versão do app</li>
+            <li>Testes de design a partir de mockups</li>
+          </ul>
+          <div class="chips"><span class="chip">Android Studio</span><span class="chip">Genymotion</span><span class="chip">Jira</span></div>
+        </article>
+      </div>
+      <p class="sub" style="margin:20px 0 0">Também pratiquei caça a bugs em mais de 15 sites reais e de treino, como DemoBlaze, Juice Shop, Domino's, Booked.net e Stellarium.</p>
+
+      <details class="shot more-details" id="amostras">
+        <summary>Ver exemplos: casos de teste, bug reports, teste de API e SQL</summary>
+        <p class="sub" style="margin:12px 0 16px">Como escrevo casos de teste e documento os bugs que encontro.</p>
+        <div class="grid samples" style="gap:20px">
 
         <div class="card">
           <h3>Casos de teste: cadastro no JPetStore</h3>
@@ -487,10 +565,23 @@ main{position:relative}
             <figure><img src="assets/sql-join-dbeaver.jpg" alt="Consulta SQL executada no DBeaver, retornando 12 artigos" loading="lazy"><figcaption>A mesma consulta executada no DBeaver.</figcaption></figure>
           </details>
         </div>
-      </div>
-      <details class="shot more-details">
-        <summary>Ver mais exemplos: 1 caso de teste e 2 bugs</summary>
-        <div class="grid samples" style="gap:20px;margin-top:12px">
+
+        <div class="card">
+          <h3>Teste de API: apagar o artigo de outra pessoa</h3>
+          <p>O sistema deve bloquear. O teste confere o código 403, o tempo de resposta e a mensagem.</p>
+<pre>pm.<span class="kw">test</span>("Assert response status code is 403", () => {
+  pm.response.to.have.status(<span class="kw">403</span>);
+});
+
+pm.<span class="kw">test</span>("Assert response time is less than 1000ms", () => {
+  pm.expect(pm.response.responseTime).to.be.below(<span class="kw">1000</span>);
+});
+
+pm.<span class="kw">test</span>("Assert response body is Forbidden", () => {
+  pm.expect(pm.response.text().trim()).to.eql(<span class="kw">"Forbidden"</span>);
+});</pre>
+        </div>
+
         <div class="card">
           <h3>Mais um caso de teste do JPetStore</h3>
           <div class="tc-list">
@@ -550,119 +641,18 @@ main{position:relative}
     </div>
   </section>
 
-  <section id="api">
-    <div class="wrap">
-      <h2>Destaque: testes de API do Conduit no Postman</h2>
-      <p class="sub">Uma coleção completa que cobre a API inteira do Conduit, com cenários positivos e negativos e verificações automáticas em cada requisição. No mesmo projeto também fiz o plano de teste, os casos de teste e a regressão no TestRail integrado ao Jira, analisei requisições no DevTools e rodei a aplicação localmente com Docker para consultar o banco com SQL.</p>
-
-      <div class="stats">
-        <div class="stat"><strong>44</strong><span>requisições</span></div>
-        <div class="stat"><strong>157</strong><span>verificações automáticas</span></div>
-        <div class="stat"><strong>5</strong><span>módulos da API</span></div>
-        <div class="stat"><strong>4</strong><span>métodos: GET, POST, PUT, DELETE</span></div>
-      </div>
-
-      <div class="grid pair" style="margin-top:20px">
-        <div class="card">
-          <h3>O que a coleção cobre</h3>
-          <ul class="checks">
-            <li><strong>Cadastro e login:</strong> 16 cenários, incluindo e-mail sem @, campos vazios, usuário e e-mail já usados</li>
-            <li><strong>Valor-limite:</strong> usuário com 41 caracteres e e-mail com mais de 254</li>
-            <li><strong>Permissões:</strong> criar, editar e apagar sem login (401) e apagar artigo ou comentário de outra pessoa (403)</li>
-            <li><strong>Artigos, perfis, tags e comentários:</strong> criação, edição, feed, filtro por tag, seguir e deixar de seguir</li>
-            <li><strong>Dados dinâmicos:</strong> variáveis encadeiam uma requisição na outra, e scripts criam um segundo usuário para testar acesso indevido</li>
-            <li><strong>Desempenho:</strong> cada resposta é checada para chegar em menos de 1 segundo</li>
-          </ul>
-          <div class="btns" style="margin-top:16px">
-            <a class="btn" href="assets/conduit-api-tests.postman_collection.json" download>Baixar a coleção (.json)</a>
-          </div>
-        </div>
-        <div class="card">
-          <h3>Exemplo: apagar o artigo de outra pessoa</h3>
-          <p>O sistema deve bloquear. O teste confere o código 403, o tempo de resposta e a mensagem.</p>
-<pre>pm.<span class="kw">test</span>("Assert response status code is 403", () => {
-  pm.response.to.have.status(<span class="kw">403</span>);
-});
-
-pm.<span class="kw">test</span>("Assert response time is less than 1000ms", () => {
-  pm.expect(pm.response.responseTime).to.be.below(<span class="kw">1000</span>);
-});
-
-pm.<span class="kw">test</span>("Assert response body is Forbidden", () => {
-  pm.expect(pm.response.text().trim()).to.eql(<span class="kw">"Forbidden"</span>);
-});</pre>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="projetos">
-    <div class="wrap">
-      <h2>Projetos</h2>
-      <p class="sub">Aplicações reais e de treino que testei de ponta a ponta, do plano ao relatório. Todos os artefatos (planos de teste, casos de teste, bug reports, RTM e SQL) estão no repositório <a href="https://github.com/Sealtiey/qa-manual-portfolio" target="_blank" rel="noopener">qa-manual-portfolio ↗</a>.</p>
-      <div class="grid g2">
-
-        <article class="card proj">
-          <div class="kind">Web · E-commerce</div>
-          <h3>JPetStore</h3>
-          <p>Loja virtual de pets: navegação, cadastro, autenticação, carrinho e finalização de pedido.</p>
-          <ul>
-            <li>Requisitos estendidos e casos de teste a partir deles</li>
-            <li>Execução dos casos e mapeamento do STLC</li>
-            <li>Bug reports das páginas de Cadastro, Sign In e Ajuda, com bug summary</li>
-          </ul>
-          <div class="chips"><span class="chip">Casos de teste</span><span class="chip">Bug reports</span><span class="chip">STLC</span></div>
-        </article>
-
-        <article class="card proj">
-          <div class="kind">Introdução à automação</div>
-          <h3>Primeiros passos com Playwright</h3>
-          <p>Módulo introdutório do curso, para entender como testes automatizados são escritos e organizados e conversar bem com quem automatiza.</p>
-          <ul>
-            <li>Conduit: login, cadastro, cenários negativos, Page Object Model e execução em mais de um navegador</li>
-            <li>Coffee Cart: suíte de 14 testes de carrinho e promoção organizada em Page Object Model</li>
-            <li>Wizard Bank: 5 testes da área do cliente escritos do zero</li>
-          </ul>
-          <div class="btns" style="margin:0 0 14px;gap:8px">
-            <a class="btn" style="padding:6px 12px;font-size:.85rem" href="https://github.com/Sealtiey/playwright-conduit-tests" target="_blank" rel="noopener">Conduit ↗</a>
-            <a class="btn" style="padding:6px 12px;font-size:.85rem" href="https://github.com/Sealtiey/playwright-coffee-cart-tests" target="_blank" rel="noopener">Coffee Cart ↗</a>
-            <a class="btn" style="padding:6px 12px;font-size:.85rem" href="https://github.com/Sealtiey/playwright-wizard-bank-tests" target="_blank" rel="noopener">Wizard Bank ↗</a>
-          </div>
-          <div class="chips"><span class="chip">Playwright</span><span class="chip">JavaScript</span><span class="chip">Em aprendizado</span></div>
-        </article>
-        <article class="card proj">
-          <div class="kind">Mobile</div>
-          <h3>Testes em apps mobile</h3>
-          <p>Apps nativos e web apps testados em emuladores, com foco em navegação, usabilidade e comportamento da interface.</p>
-          <ul>
-            <li>Ambiente com Android Studio e Genymotion</li>
-            <li>Bugs registrados no Jira com gravação de tela, dispositivo, SO e versão do app</li>
-            <li>Testes de design a partir de mockups</li>
-          </ul>
-          <div class="chips"><span class="chip">Android Studio</span><span class="chip">Genymotion</span><span class="chip">Jira</span></div>
-        </article>
-      </div>
-      <p class="sub" style="margin:24px 0 0">Também pratiquei caça a bugs em mais de 15 sites reais e de treino, como DemoBlaze, Juice Shop, Domino's, Booked.net e Stellarium.</p>
-    </div>
-  </section>
-
   <section id="sobre">
     <div class="wrap">
       <h2>De recrutadora a QA</h2>
-      <p class="sub">Atuei 5 anos como Tech Recruiter, contratando para tecnologia. No dia a dia eu alinhava requisitos com gestores técnicos antes de buscar candidatos. Hoje faço o mesmo antes de escrever casos de teste. Estas habilidades vieram comigo:</p>
+      <p class="sub">Atuei 5 anos como Tech Recruiter, contratando para tecnologia. Eu alinhava requisitos com gestores técnicos antes de buscar candidatos, e hoje faço o mesmo antes de escrever casos de teste.</p>
       <div class="diff">
-        <div class="card"><strong>Investigação</strong><p>Fazer as perguntas certas, desconfiar do óbvio e ir atrás do detalhe que ninguém viu, agora aplicado a requisitos e fluxos.</p></div>
-        <div class="card"><strong>Comunicação clara</strong><p>Anos dando feedback para candidatos e clientes. Meus bug reports são objetivos, reproduzíveis e sem ruído.</p></div>
-        <div class="card"><strong>Visão de negócio</strong><p>Recrutei para Desenvolvimento, Infra, Banco de Dados e QA. Entendo como times de produto funcionam e o que importa para eles.</p></div>
-        <div class="card"><strong>Organização</strong><p>Pós-graduação em Gestão de Projetos e prática com processos: planos de teste, prazos, critérios de saída e rastreabilidade.</p></div>
+        <div class="card"><strong>Investigação</strong><p>Fazer as perguntas certas e ir atrás do detalhe que ninguém viu.</p></div>
+        <div class="card"><strong>Comunicação clara</strong><p>Bug reports objetivos, reproduzíveis e sem ruído.</p></div>
+        <div class="card"><strong>Visão de negócio</strong><p>Recrutei para Dev, Infra, Banco de Dados e QA e sei o que importa para um time de produto.</p></div>
+        <div class="card"><strong>Organização</strong><p>Pós em Gestão de Projetos: planos, prazos, critérios de saída e rastreabilidade.</p></div>
       </div>
-    </div>
-  </section>
 
-  <section id="habilidades">
-    <div class="wrap">
-      <h2>Habilidades e ferramentas</h2>
-      <p class="sub">Formação prática em QA pela Mate Academy, com entregas revisadas em cada módulo.</p>
+      <h3 id="habilidades" style="margin:36px 0 14px">Habilidades e ferramentas</h3>
       <div class="grid g3">
         <div class="card skill-group">
           <h3>Testes e documentação</h3>
@@ -683,9 +673,7 @@ pm.<span class="kw">test</span>("Assert response body is Forbidden", () => {
           </div>
         </div>
       </div>
-      <p class="sub" style="margin:16px 0 0;font-size:.92rem"><strong style="color:var(--text)">Inglês:</strong> pré-intermediário, em evolução. Casos de teste e bug reports escritos em inglês.</p>
-      <p class="sub" style="margin:6px 0 0;font-size:.92rem"><strong style="color:var(--text)">Libras:</strong> intermediário, com interesse em testes de acessibilidade.</p>
-      <p class="sub" style="margin:6px 0 0;font-size:.92rem">Também: uso de IA no trabalho com validação das respostas e ética em QA.</p>
+      <p class="sub" style="margin:16px 0 0;font-size:.92rem"><strong style="color:var(--text)">Inglês</strong> pré-intermediário, com casos de teste e bug reports escritos em inglês · <strong style="color:var(--text)">Libras</strong> intermediário, com interesse em acessibilidade · uso de IA com validação das respostas.</p>
     </div>
   </section>
 
@@ -698,13 +686,13 @@ pm.<span class="kw">test</span>("Assert response body is Forbidden", () => {
         <li><span><span>API Beginner</span></span><span class="cert-org">Postman</span></li>
         <li><a href="assets/certificados/qa-theory.pdf" target="_blank" rel="noopener"><span>QA Theory</span><span class="cert-org">Mate Academy · PDF ↗</span></a></li>
         <li><a href="assets/certificados/testing-web-applications.pdf" target="_blank" rel="noopener"><span>Testing Web Applications</span><span class="cert-org">Mate Academy · PDF ↗</span></a></li>
+      </ul>
+      <details class="shot more-certs">
+        <summary>Ver todos os certificados (12)</summary>
+      <ul class="certs">
         <li><a href="assets/certificados/sql-basics.pdf" target="_blank" rel="noopener"><span>SQL Basics</span><span class="cert-org">Mate Academy · PDF ↗</span></a></li>
         <li><a href="assets/certificados/javascript-basics-extended.pdf" target="_blank" rel="noopener"><span>JavaScript Basics Extended</span><span class="cert-org">Mate Academy · PDF ↗</span></a></li>
         <li><a href="assets/certificados/git-and-terminal.pdf" target="_blank" rel="noopener"><span>Git and Terminal</span><span class="cert-org">Mate Academy · PDF ↗</span></a></li>
-      </ul>
-      <details class="shot more-certs">
-        <summary>Ver todos os certificados (9)</summary>
-      <ul class="certs">
         <li><span><span>HTML + CSS Basics</span></span><span class="cert-org">Mate Academy</span></li>
         <li><a href="assets/certificados/new-javascript-basics.pdf" target="_blank" rel="noopener"><span>New JavaScript Basics</span><span class="cert-org">Mate Academy · PDF ↗</span></a></li>
         <li><a href="assets/certificados/git-and-terminal-practice.pdf" target="_blank" rel="noopener"><span>Git and Terminal: Practice</span><span class="cert-org">Mate Academy · PDF ↗</span></a></li>
